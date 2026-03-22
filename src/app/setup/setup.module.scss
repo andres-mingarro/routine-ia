@@ -1,0 +1,15 @@
+.pageWrapper {
+  min-height: 100dvh;
+  background: #f0f4f8;
+  background-image:
+    radial-gradient(ellipse at top right, rgba(16, 185, 129, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom left, rgba(5, 150, 105, 0.04) 0%, transparent 50%);
+}
+
+.main {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 1rem 6rem;
+  display: flex;
+  flex-direction: column;
+}

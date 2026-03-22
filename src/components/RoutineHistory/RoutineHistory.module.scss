@@ -1,0 +1,194 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.historyList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.routineCard {
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+
+  &:hover {
+    border-color: rgba(16, 185, 129, 0.2);
+  }
+}
+
+.routineHeader {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  text-align: left;
+  gap: 0.75rem;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.02);
+  }
+}
+
+.routineInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  flex: 1;
+}
+
+.routineMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.metaIcon {
+  color: #10b981;
+}
+
+.routineStats {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.weekBadge {
+  font-size: 0.75rem;
+  color: #059669;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.18);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.exerciseStat {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.chevron {
+  color: #9ca3af;
+  flex-shrink: 0;
+}
+
+.routineContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.5rem 1.25rem 1.25rem;
+}
+
+.daySection {
+  border-left: 3px solid;
+  padding-left: 0.875rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.dayHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.historyDayName {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.historyMuscleLabel {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.9;
+}
+
+.historyExercises {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.375rem;
+
+  @media (min-width: 480px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.historyExercise {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.5rem;
+  background: #f9fafb;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.historyExerciseInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.0625rem;
+  min-width: 0;
+}
+
+.historyExerciseName {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #374151;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.historyExerciseSets {
+  font-size: 0.6875rem;
+  color: #9ca3af;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  gap: 0.75rem;
+}
+
+.emptyEmoji {
+  font-size: 3rem;
+}
+
+.emptyTitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.emptyDescription {
+  color: #6b7280;
+  font-size: 0.875rem;
+  max-width: 280px;
+  line-height: 1.6;
+  margin: 0;
+}

@@ -1,0 +1,27 @@
+.pageWrapper {
+  min-height: 100dvh;
+  background: #f0f4f8;
+  background-image:
+    radial-gradient(ellipse at top left, rgba(16, 185, 129, 0.05) 0%, transparent 40%),
+    radial-gradient(ellipse at bottom right, rgba(5, 150, 105, 0.04) 0%, transparent 40%);
+}
+
+.main {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 1rem 6rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.errorMessage {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 10px;
+  color: #dc2626;
+  font-size: 0.875rem;
+}

@@ -1,0 +1,118 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.exerciseItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: #f9fafb;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: background 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    background: #f3f4f6;
+    border-color: rgba(16, 185, 129, 0.2);
+  }
+
+  &.swapActive {
+    border-color: rgba(16, 185, 129, 0.4);
+    background: #f0fdf4;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+}
+
+.indexBadge {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  color: #059669;
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.exerciseInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.exerciseName {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 0.125rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.exerciseNotes {
+  font-size: 0.7rem;
+  color: #9ca3af;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.exerciseStats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.statIcon {
+  color: #9ca3af;
+}
+
+.statValue {
+  font-size: 0.75rem;
+  color: #6b7280;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.swapBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #ffffff;
+  color: #9ca3af;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+
+  &:hover {
+    color: #059669;
+    background: #ecfdf5;
+    border-color: rgba(16, 185, 129, 0.3);
+  }
+
+  &.swapBtnActive {
+    color: #059669;
+    background: #ecfdf5;
+    border-color: rgba(16, 185, 129, 0.4);
+  }
+}

@@ -1,0 +1,125 @@
+.dayCard {
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+
+  &.isToday {
+    background: #ffffff;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+
+    .dayName {
+      color: #111827;
+    }
+  }
+}
+
+.dayHeader {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  text-align: left;
+  gap: 0.75rem;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.02);
+  }
+}
+
+.dayInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.dayEmoji {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.dayText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 0;
+}
+
+.dayName {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #111827;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.todayBadge {
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: #10b981;
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.muscleGroupLabel {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.85;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.exerciseCount {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.chevron {
+  color: #9ca3af;
+  transition: color 0.2s ease;
+
+  .dayHeader:hover & {
+    color: #6b7280;
+  }
+}
+
+.divider {
+  height: 1px;
+  margin: 0 1.25rem;
+}
+
+.exerciseList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem 1rem;
+}
+
+.noExercises {
+  color: #9ca3af;
+  font-size: 0.875rem;
+  text-align: center;
+  padding: 1rem;
+}
