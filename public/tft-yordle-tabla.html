@@ -3,238 +3,246 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TFT — Yordle Build Table</title>
+  <title>TFT Set 16 — Yordle Tabla de Items</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600&display=swap');
 
     :root {
-      --gold: #c89b3c;
-      --gold-light: #f0e6a2;
-      --dark: #0a0e1a;
-      --panel: #111827;
-      --card: #1a2235;
-      --border: #2a3a55;
-      --yordle: #9b59b6;
+      --gold:         #c89b3c;
+      --gold-light:   #f0e6a2;
+      --dark:         #080d18;
+      --panel:        #0f1929;
+      --card:         #162031;
+      --border:       #243047;
+      --yordle:       #9b59b6;
       --yordle-light: #d7a8f0;
-      --text: #c8d6e8;
-      --muted: #6b7e9a;
+      --text:         #c8d6e8;
+      --muted:        #637a96;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       background: var(--dark);
       background-image:
-        radial-gradient(ellipse at 20% 50%, rgba(155,89,182,.1) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 20%, rgba(200,155,60,.07) 0%, transparent 50%);
+        radial-gradient(ellipse 70% 60% at 15% 40%, rgba(155,89,182,.1) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 85% 10%, rgba(200,155,60,.07) 0%, transparent 60%);
       color: var(--text);
       font-family: 'Inter', sans-serif;
       min-height: 100vh;
-      padding: 2rem 1rem 4rem;
+      padding: 2.5rem 1rem 5rem;
     }
 
-    /* ── HEADER ── */
+    /* ─── HEADER ─── */
     header { text-align: center; margin-bottom: 2.5rem; }
     .badge {
       display: inline-block;
-      background: linear-gradient(135deg, #4b2069, #7b3fa6);
+      background: linear-gradient(135deg, #3b1560, #6b2fa0);
       border: 1px solid var(--yordle);
       border-radius: 999px;
-      padding: .35rem 1.2rem;
-      font-size: .78rem;
-      font-weight: 600;
-      letter-spacing: .08em;
+      padding: .4rem 1.2rem;
+      font-size: .76rem;
+      font-weight: 700;
+      letter-spacing: .1em;
       text-transform: uppercase;
       color: var(--yordle-light);
       margin-bottom: .9rem;
+      box-shadow: 0 0 20px rgba(155,89,182,.25);
     }
     h1 {
       font-family: 'Cinzel', serif;
       font-size: clamp(1.8rem, 5vw, 2.8rem);
-      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 55%, var(--gold) 100%);
+      background: linear-gradient(135deg, #9b6a1a 0%, var(--gold) 30%, var(--gold-light) 60%, var(--gold) 80%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
     .subtitle { color: var(--muted); font-size: .88rem; margin-top: .4rem; }
 
-    .wrapper { max-width: 1050px; margin: 0 auto; }
+    .wrapper { max-width: 1080px; margin: 0 auto; }
 
-    /* ── TABLE WRAPPER ── */
+    /* ─── TABLE ─── */
     .table-wrap {
       overflow-x: auto;
-      border-radius: 16px;
+      border-radius: 18px;
       border: 1px solid var(--border);
       background: var(--panel);
     }
-
     table { width: 100%; border-collapse: collapse; }
 
     thead tr {
-      background: linear-gradient(90deg, #16213a, #1a2a40);
+      background: linear-gradient(90deg, #111e32, #162436);
       border-bottom: 2px solid var(--gold);
     }
     thead th {
-      padding: .85rem 1rem;
+      padding: .9rem 1rem;
       text-align: left;
       font-family: 'Cinzel', serif;
-      font-size: .7rem;
-      font-weight: 600;
-      letter-spacing: .1em;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .12em;
       text-transform: uppercase;
       color: var(--gold);
       white-space: nowrap;
     }
 
-    tbody tr { border-bottom: 1px solid var(--border); transition: background .15s; }
+    tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background .15s;
+    }
     tbody tr:last-child { border-bottom: none; }
     tbody tr:hover { background: rgba(155,89,182,.07); }
+    td { padding: .9rem 1rem; vertical-align: middle; }
 
-    td { padding: .85rem 1rem; vertical-align: middle; }
-
-    /* ── CHAMPION CELL ── */
+    /* ─── CHAMPION CELL ─── */
     .champ-cell {
       display: flex;
       align-items: center;
       gap: .75rem;
-      min-width: 155px;
+      min-width: 160px;
     }
-    .champ-img-wrap {
-      position: relative;
-      flex-shrink: 0;
-    }
-    .champ-img-wrap img {
-      width: 56px;
-      height: 56px;
-      border-radius: 10px;
-      border: 2px solid var(--border);
+    .portrait-wrap { position: relative; flex-shrink: 0; }
+    .portrait-wrap img {
+      width: 60px;
+      height: 60px;
+      border-radius: 11px;
       object-fit: cover;
+      border: 2px solid var(--border);
       display: block;
+      background: #0f1929;
     }
-    .champ-img-wrap.carry img {
+    .portrait-wrap.carry img {
       border-color: var(--gold);
-      box-shadow: 0 0 12px rgba(200,155,60,.4);
+      box-shadow: 0 0 14px rgba(200,155,60,.45);
     }
-    .carry-star {
+    .portrait-wrap.unlock img { border-color: var(--yordle); border-style: dashed; }
+    .plabel {
       position: absolute;
-      top: -8px;
-      right: -8px;
-      background: var(--gold);
-      color: #0a0e1a;
+      top: -9px;
+      right: -9px;
       font-size: .55rem;
       font-weight: 800;
       border-radius: 4px;
       padding: 1px 4px;
-      letter-spacing: .04em;
+      white-space: nowrap;
     }
-    .champ-info .name { font-weight: 600; font-size: .9rem; color: #e8f0f8; }
+    .plabel.carry  { background: var(--gold);   color: #0a0e1a; }
+    .plabel.unlock { background: var(--yordle); color: #fff; }
+
+    .champ-info .name {
+      font-weight: 700;
+      font-size: .9rem;
+      color: #e8f0f8;
+      margin-bottom: 3px;
+    }
     .cost-badge {
       display: inline-block;
       font-size: .66rem;
       font-weight: 700;
       border-radius: 4px;
       padding: 1px 6px;
-      margin-top: 3px;
     }
-    .cost-1 { background: #4a5568; color: #e2e8f0; }
-    .cost-2 { background: #276749; color: #9ae6b4; }
-    .cost-3 { background: #2b6cb0; color: #90cdf4; }
-    .cost-4 { background: #553c9a; color: #d6bcfa; }
+    .c1 { background: #4a5568; color: #e2e8f0; }
+    .c2 { background: #276749; color: #9ae6b4; }
+    .c3 { background: #2b6cb0; color: #90cdf4; }
+    .c4 { background: #553c9a; color: #d6bcfa; }
 
-    /* ── ROLE BADGE ── */
+    /* ─── ROLE ─── */
     .role-badge {
       display: inline-flex;
       align-items: center;
       gap: .3rem;
       border-radius: 6px;
       padding: .25rem .65rem;
-      font-size: .74rem;
+      font-size: .73rem;
       font-weight: 600;
       white-space: nowrap;
     }
-    .role-carry  { background: rgba(200,155,60,.15);  color: var(--gold-light); border: 1px solid rgba(200,155,60,.4); }
-    .role-ap     { background: rgba(124,92,219,.2);   color: #c4b5fd;           border: 1px solid rgba(124,92,219,.4); }
-    .role-tank   { background: rgba(74,158,112,.15);  color: #86efac;           border: 1px solid rgba(74,158,112,.4); }
-    .role-support{ background: rgba(56,189,248,.15);  color: #7dd3fc;           border: 1px solid rgba(56,189,248,.4); }
+    .r-carry  { background: rgba(200,155,60,.15);  color: var(--gold-light); border: 1px solid rgba(200,155,60,.4); }
+    .r-ap     { background: rgba(124,92,219,.2);   color: #c4b5fd;           border: 1px solid rgba(124,92,219,.4); }
+    .r-tank   { background: rgba(74,158,112,.15);  color: #86efac;           border: 1px solid rgba(74,158,112,.4); }
+    .r-flex   { background: rgba(56,189,248,.15);  color: #7dd3fc;           border: 1px solid rgba(56,189,248,.4); }
 
-    /* ── TRAITS ── */
+    /* ─── TRAITS ─── */
     .traits-cell { display: flex; flex-wrap: wrap; gap: .3rem; }
-    .trait-tag {
+    .ttag {
       font-size: .67rem;
       font-weight: 600;
       border-radius: 4px;
       padding: 2px 7px;
     }
-    .t-yordle { background: rgba(155,89,182,.22); color: var(--yordle-light); border: 1px solid rgba(155,89,182,.4); }
-    .t-other  { background: rgba(200,155,60,.12); color: var(--gold-light);   border: 1px solid rgba(200,155,60,.25); }
+    .tt-y { background: rgba(155,89,182,.22); color: var(--yordle-light); border: 1px solid rgba(155,89,182,.4); }
+    .tt-o { background: rgba(200,155,60,.12); color: var(--gold-light);   border: 1px solid rgba(200,155,60,.25); }
 
-    /* ── ITEMS ── */
+    /* ─── ITEMS ─── */
     .items-cell { display: flex; gap: .45rem; flex-wrap: wrap; align-items: flex-start; }
-    .item-slot { display: flex; flex-direction: column; align-items: center; gap: .25rem; }
+    .item-slot  { display: flex; flex-direction: column; align-items: center; gap: .25rem; }
     .item-slot img {
-      width: 52px;
-      height: 52px;
-      border-radius: 8px;
-      border: 2px solid var(--border);
+      width: 54px;
+      height: 54px;
+      border-radius: 9px;
       object-fit: cover;
+      border: 2px solid var(--border);
+      background: #0f1929;
+      display: block;
       transition: transform .15s, border-color .15s, box-shadow .15s;
       cursor: default;
-      display: block;
-      background: #1a2235;
     }
     .item-slot img:hover {
-      transform: scale(1.15);
+      transform: scale(1.16);
       border-color: var(--gold);
-      box-shadow: 0 0 12px rgba(200,155,60,.4);
+      box-shadow: 0 4px 16px rgba(200,155,60,.45);
     }
-    .item-label {
-      font-size: .6rem;
+    .item-slot .ilabel {
+      font-size: .59rem;
       color: var(--muted);
       text-align: center;
-      max-width: 56px;
+      max-width: 58px;
       line-height: 1.2;
     }
 
-    /* ── PRIORITY STARS ── */
+    /* ─── STARS ─── */
     .stars { display: flex; gap: 2px; }
-    .star      { color: var(--gold);    font-size: .9rem; }
-    .star.empty{ color: #243045; font-size: .9rem; }
+    .star        { color: var(--gold); font-size: .92rem; }
+    .star.empty  { color: #1e2e42;    font-size: .92rem; }
 
-    /* ── NOTE ── */
-    .note { font-size: .77rem; color: var(--muted); line-height: 1.55; max-width: 200px; }
+    /* ─── NOTES ─── */
+    .note { font-size: .77rem; color: var(--muted); line-height: 1.6; max-width: 195px; }
 
-    /* ── LEGEND ── */
+    /* ─── LEGEND ─── */
     .legend-box {
       margin-top: 1.5rem;
       background: var(--panel);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.2rem 1.4rem;
+      border-radius: 14px;
+      padding: 1.3rem 1.5rem;
     }
     .legend-title {
       font-family: 'Cinzel', serif;
       font-size: .72rem;
       color: var(--gold);
-      letter-spacing: .1em;
+      letter-spacing: .12em;
       text-transform: uppercase;
       border-left: 3px solid var(--gold);
-      padding-left: .6rem;
+      padding-left: .65rem;
       margin-bottom: 1rem;
     }
     .legend-row { display: flex; flex-wrap: wrap; gap: .55rem; }
-    .legend-item {
+    .legend-chip {
       display: flex;
       align-items: center;
       gap: .45rem;
       font-size: .73rem;
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: .25rem .65rem;
+      border-radius: 7px;
+      padding: .28rem .7rem;
+      transition: border-color .15s;
     }
-    .legend-item img {
-      width: 28px;
-      height: 28px;
+    .legend-chip:hover { border-color: var(--gold); }
+    .legend-chip img {
+      width: 30px;
+      height: 30px;
       border-radius: 5px;
       object-fit: cover;
       border: 1px solid var(--border);
@@ -245,15 +253,17 @@
       margin-top: 2rem;
       font-size: .72rem;
       color: var(--muted);
+      line-height: 1.7;
     }
+    footer a { color: var(--muted); }
   </style>
 </head>
 <body>
 
 <header>
-  <div class="badge">🐾 Comp Guide</div>
+  <div class="badge">🐾 TFT Set 16: Lore &amp; Legends</div>
   <h1>Yordle Build — Items Originales</h1>
-  <p class="subtitle">TFT · Yordle 6 · Items recomendados por campeón</p>
+  <p class="subtitle">Set 16 · Yordle 8 Reroll · Items recomendados por campeón con imágenes reales</p>
 </header>
 
 <div class="wrapper">
@@ -271,409 +281,361 @@
       </thead>
       <tbody>
 
-        <!-- TRISTANA -->
-        <tr>
-          <td>
-            <div class="champ-cell">
-              <div class="champ-img-wrap carry">
-                <img src="https://raw.communitydragon.org/latest/game/assets/characters/tristana/hud/tristana_square.png" alt="Tristana" />
-                <span class="carry-star">CARRY</span>
-              </div>
-              <div class="champ-info">
-                <div class="name">Tristana</div>
-                <span class="cost-badge cost-2">2 Gold</span>
-              </div>
-            </div>
-          </td>
-          <td><span class="role-badge role-carry">⚔️ Carry AD</span></td>
-          <td>
-            <div class="traits-cell">
-              <span class="trait-tag t-yordle">Yordle</span>
-              <span class="trait-tag t-other">Duelist</span>
-            </div>
-          </td>
-          <td>
-            <div class="items-cell">
-              <div class="item-slot">
-                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Infinity_Edge_TFT_item.png/100px-Infinity_Edge_TFT_item.png" alt="Infinity Edge" />
-                <div class="item-label">Infinity Edge</div>
-              </div>
-              <div class="item-slot">
-                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Guinsoo%27s_Rageblade_TFT_item.png/100px-Guinsoo%27s_Rageblade_TFT_item.png" alt="Guinsoo's Rageblade" />
-                <div class="item-label">Guinsoo's Rageblade</div>
-              </div>
-              <div class="item-slot">
-                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Last_Whisper_TFT_item.png/100px-Last_Whisper_TFT_item.png" alt="Last Whisper" />
-                <div class="item-label">Last Whisper</div>
-              </div>
-            </div>
-          </td>
-          <td><div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div></td>
-          <td><p class="note">Carry principal. Llevar a ⭐⭐⭐ cuanto antes. Posicionar en el flanco.</p></td>
-        </tr>
-
-        <!-- VEX -->
-        <tr>
-          <td>
-            <div class="champ-cell">
-              <div class="champ-img-wrap carry">
-                <img src="https://raw.communitydragon.org/latest/game/assets/characters/vex/hud/vex_square_0.png" alt="Vex" />
-                <span class="carry-star">CARRY</span>
-              </div>
-              <div class="champ-info">
-                <div class="name">Vex</div>
-                <span class="cost-badge cost-4">4 Gold</span>
-              </div>
-            </div>
-          </td>
-          <td><span class="role-badge role-ap">🔮 Carry AP</span></td>
-          <td>
-            <div class="traits-cell">
-              <span class="trait-tag t-yordle">Yordle</span>
-              <span class="trait-tag t-other">Bastion</span>
-            </div>
-          </td>
-          <td>
-            <div class="items-cell">
-              <div class="item-slot">
-                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Rabadon%27s_Deathcap_TFT_item.png/100px-Rabadon%27s_Deathcap_TFT_item.png" alt="Rabadon's Deathcap" />
-                <div class="item-label">Rabadon's Deathcap</div>
-              </div>
-              <div class="item-slot">
-                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Jeweled_Gauntlet_TFT_item.png/100px-Jeweled_Gauntlet_TFT_item.png" alt="Jeweled Gauntlet" />
-                <div class="item-label">Jeweled Gauntlet</div>
-              </div>
-              <div class="item-slot">
-                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Blue_Buff_TFT_item.png/100px-Blue_Buff_TFT_item.png" alt="Blue Buff" />
-                <div class="item-label">Blue Buff</div>
-              </div>
-            </div>
-          </td>
-          <td><div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div></td>
-          <td><p class="note">Carry AP. Blue Buff permite castear cada ronda. Crit + AP = burst enorme.</p></td>
-        </tr>
-
-        <!-- LULU -->
-        <tr>
-          <td>
-            <div class="champ-cell">
-              <div class="champ-img-wrap carry">
-                <img src="https://raw.communitydragon.org/latest/game/assets/characters/lulu/hud/lulu_square_0.png" alt="Lulu" />
-                <span class="carry-star">CARRY</span>
-              </div>
-              <div class="champ-info">
-                <div class="name">Lulu</div>
-                <span class="cost-badge cost-3">3 Gold</span>
-              </div>
-            </div>
-          </td>
-          <td><span class="role-badge role-support">🌟 Support AP</span></td>
-          <td>
-            <div class="traits-cell">
-              <span class="trait-tag t-yordle">Yordle</span>
-              <span class="trait-tag t-other">Invoker</span>
-            </div>
-          </td>
-          <td>
-            <div class="items-cell">
-              <div class="item-slot">
-                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Rabadon%27s_Deathcap_TFT_item.png/100px-Rabadon%27s_Deathcap_TFT_item.png" alt="Rabadon's Deathcap" />
-                <div class="item-label">Rabadon's Deathcap</div>
-              </div>
-              <div class="item-slot">
-                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Archangel%27s_Staff_TFT_item.png/100px-Archangel%27s_Staff_TFT_item.png" alt="Archangel's Staff" />
-                <div class="item-label">Archangel's Staff</div>
-              </div>
-              <div class="item-slot">
-                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Zeke%27s_Herald_TFT_item.png/100px-Zeke%27s_Herald_TFT_item.png" alt="Zeke's Herald" />
-                <div class="item-label">Zeke's Herald</div>
-              </div>
-            </div>
-          </td>
-          <td><div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span></div></td>
-          <td><p class="note">Potencia habilidades. Zeke's da velocidad de ataque al carry más cercano.</p></td>
-        </tr>
-
-        <!-- HEIMERDINGER -->
-        <tr>
-          <td>
-            <div class="champ-cell">
-              <div class="champ-img-wrap">
-                <img src="https://raw.communitydragon.org/latest/game/assets/characters/heimerdinger/hud/heimerdinger_square.png" alt="Heimerdinger" />
-              </div>
-              <div class="champ-info">
-                <div class="name">Heimerdinger</div>
-                <span class="cost-badge cost-3">3 Gold</span>
-              </div>
-            </div>
-          </td>
-          <td><span class="role-badge role-ap">🔮 AP DPS</span></td>
-          <td>
-            <div class="traits-cell">
-              <span class="trait-tag t-yordle">Yordle</span>
-              <span class="trait-tag t-other">Piltover</span>
-            </div>
-          </td>
-          <td>
-            <div class="items-cell">
-              <div class="item-slot">
-                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Morellonomicon_TFT_item.png/100px-Morellonomicon_TFT_item.png" alt="Morellonomicon" />
-                <div class="item-label">Morellonomicon</div>
-              </div>
-              <div class="item-slot">
-                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Blue_Buff_TFT_item.png/100px-Blue_Buff_TFT_item.png" alt="Blue Buff" />
-                <div class="item-label">Blue Buff</div>
-              </div>
-              <div class="item-slot">
-                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Ionic_Spark_TFT_item.png/100px-Ionic_Spark_TFT_item.png" alt="Ionic Spark" />
-                <div class="item-label">Ionic Spark</div>
-              </div>
-            </div>
-          </td>
-          <td><div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span><span class="star empty">★</span></div></td>
-          <td><p class="note">Ionic Spark shredea MR del enemigo para todo el equipo AP.</p></td>
-        </tr>
-
-        <!-- POPPY -->
-        <tr>
-          <td>
-            <div class="champ-cell">
-              <div class="champ-img-wrap">
-                <img src="https://raw.communitydragon.org/latest/game/assets/characters/poppy/hud/poppy_square.png" alt="Poppy" />
-              </div>
-              <div class="champ-info">
-                <div class="name">Poppy</div>
-                <span class="cost-badge cost-1">1 Gold</span>
-              </div>
-            </div>
-          </td>
-          <td><span class="role-badge role-tank">🛡️ Tank</span></td>
-          <td>
-            <div class="traits-cell">
-              <span class="trait-tag t-yordle">Yordle</span>
-              <span class="trait-tag t-other">Bastion</span>
-            </div>
-          </td>
-          <td>
-            <div class="items-cell">
-              <div class="item-slot">
-                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Warmog%27s_Armor_TFT_item.png/100px-Warmog%27s_Armor_TFT_item.png" alt="Warmog's Armor" />
-                <div class="item-label">Warmog's Armor</div>
-              </div>
-              <div class="item-slot">
-                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Sunfire_Cape_TFT_item.png/100px-Sunfire_Cape_TFT_item.png" alt="Sunfire Cape" />
-                <div class="item-label">Sunfire Cape</div>
-              </div>
-              <div class="item-slot">
-                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Dragon%27s_Claw_TFT_item.png/100px-Dragon%27s_Claw_TFT_item.png" alt="Dragon's Claw" />
-                <div class="item-label">Dragon's Claw</div>
-              </div>
-            </div>
-          </td>
-          <td><div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span><span class="star empty">★</span></div></td>
-          <td><p class="note">Frontline principal. Sunfire quema a los enemigos. Dragon's Claw contra AP.</p></td>
-        </tr>
-
-        <!-- RUMBLE -->
-        <tr>
-          <td>
-            <div class="champ-cell">
-              <div class="champ-img-wrap">
-                <img src="https://raw.communitydragon.org/latest/game/assets/characters/rumble/hud/rumble_square.png" alt="Rumble" />
-              </div>
-              <div class="champ-info">
-                <div class="name">Rumble</div>
-                <span class="cost-badge cost-4">4 Gold</span>
-              </div>
-            </div>
-          </td>
-          <td><span class="role-badge role-tank">🛡️ Tank AP</span></td>
-          <td>
-            <div class="traits-cell">
-              <span class="trait-tag t-yordle">Yordle</span>
-              <span class="trait-tag t-other">Duelist</span>
-            </div>
-          </td>
-          <td>
-            <div class="items-cell">
-              <div class="item-slot">
-                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Warmog%27s_Armor_TFT_item.png/100px-Warmog%27s_Armor_TFT_item.png" alt="Warmog's Armor" />
-                <div class="item-label">Warmog's Armor</div>
-              </div>
-              <div class="item-slot">
-                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Morellonomicon_TFT_item.png/100px-Morellonomicon_TFT_item.png" alt="Morellonomicon" />
-                <div class="item-label">Morellonomicon</div>
-              </div>
-              <div class="item-slot">
-                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Bramble_Vest_TFT_item.png/100px-Bramble_Vest_TFT_item.png" alt="Bramble Vest" />
-                <div class="item-label">Bramble Vest</div>
-              </div>
-            </div>
-          </td>
-          <td><div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span><span class="star empty">★</span></div></td>
-          <td><p class="note">Tank + daño mixto. Bramble Vest bloquea las curas del enemigo.</p></td>
-        </tr>
-
         <!-- TEEMO -->
         <tr>
           <td>
             <div class="champ-cell">
-              <div class="champ-img-wrap">
-                <img src="https://raw.communitydragon.org/latest/game/assets/characters/teemo/hud/teemo_square_0.asu_teemo.png" alt="Teemo" />
+              <div class="portrait-wrap carry">
+                <img src="https://sunderarmor.com/characters/Skin/16/Teemo.png" alt="Teemo" />
+                <span class="plabel carry">CARRY</span>
               </div>
               <div class="champ-info">
                 <div class="name">Teemo</div>
-                <span class="cost-badge cost-2">2 Gold</span>
+                <span class="cost-badge c1">1 Gold</span>
               </div>
             </div>
           </td>
-          <td><span class="role-badge role-ap">🔮 AP DPS</span></td>
-          <td>
-            <div class="traits-cell">
-              <span class="trait-tag t-yordle">Yordle</span>
-              <span class="trait-tag t-other">Piltover</span>
-            </div>
-          </td>
+          <td><span class="role-badge r-carry">⚔️ Carry Principal</span></td>
+          <td><div class="traits-cell"><span class="ttag tt-y">Yordle</span><span class="ttag tt-o">Piltover</span></div></td>
           <td>
             <div class="items-cell">
               <div class="item-slot">
-                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Rabadon%27s_Deathcap_TFT_item.png/100px-Rabadon%27s_Deathcap_TFT_item.png" alt="Rabadon's Deathcap" />
-                <div class="item-label">Rabadon's Deathcap</div>
+                <img src="https://sunderarmor.com/items/StatikkShiv.png" alt="Statikk Shiv" />
+                <div class="ilabel">Statikk Shiv</div>
               </div>
               <div class="item-slot">
-                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Jeweled_Gauntlet_TFT_item.png/100px-Jeweled_Gauntlet_TFT_item.png" alt="Jeweled Gauntlet" />
-                <div class="item-label">Jeweled Gauntlet</div>
+                <img src="https://sunderarmor.com/items/Morellonomicon.png" alt="Morellonomicon" />
+                <div class="ilabel">Morellonomicon</div>
               </div>
               <div class="item-slot">
-                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Morellonomicon_TFT_item.png/100px-Morellonomicon_TFT_item.png" alt="Morellonomicon" />
-                <div class="item-label">Morellonomicon</div>
+                <img src="https://sunderarmor.com/items/JeweledGauntlet.png" alt="Jeweled Gauntlet" />
+                <div class="ilabel">Jeweled Gauntlet</div>
               </div>
             </div>
           </td>
-          <td><div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span><span class="star empty">★</span></div></td>
-          <td><p class="note">Sus hongos hacen mucho daño AP. Morellonomicon + Rabadon = setas letales.</p></td>
+          <td><div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div></td>
+          <td><p class="note">Carry principal. Hongos AP + Statikk para cadena de daño. Buscar 3⭐.</p></td>
+        </tr>
+
+        <!-- VEIGAR -->
+        <tr>
+          <td>
+            <div class="champ-cell">
+              <div class="portrait-wrap carry unlock">
+                <img src="https://sunderarmor.com/characters/Skin/16/Veigar.png" alt="Veigar" />
+                <span class="plabel carry">CARRY</span>
+              </div>
+              <div class="champ-info">
+                <div class="name">Veigar</div>
+                <span class="cost-badge c3">3 Gold</span>
+              </div>
+            </div>
+          </td>
+          <td><span class="role-badge r-ap">🔮 Carry AP Burst</span></td>
+          <td><div class="traits-cell"><span class="ttag tt-y">Yordle</span><span class="ttag tt-o">Piltover</span></div></td>
+          <td>
+            <div class="items-cell">
+              <div class="item-slot">
+                <img src="https://sunderarmor.com/items/SpearofShojin.png" alt="Spear of Shojin" />
+                <div class="ilabel">Spear of Shojin</div>
+              </div>
+              <div class="item-slot">
+                <img src="https://sunderarmor.com/items/RabadonsDeathcap.png" alt="Rabadon's Deathcap" />
+                <div class="ilabel">Rabadon's Deathcap</div>
+              </div>
+              <div class="item-slot">
+                <img src="https://sunderarmor.com/items/HextechGunblade.png" alt="Hextech Gunblade" />
+                <div class="ilabel">Hextech Gunblade</div>
+              </div>
+            </div>
+          </td>
+          <td><div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div></td>
+          <td><p class="note">Desbloquear: colocar 2× Rabadon en una unidad. Burst masivo con Shojin.</p></td>
+        </tr>
+
+        <!-- FIZZ -->
+        <tr>
+          <td>
+            <div class="champ-cell">
+              <div class="portrait-wrap unlock">
+                <img src="https://sunderarmor.com/characters/Skin/16/Fizz.png" alt="Fizz" />
+                <span class="plabel unlock">🔓</span>
+              </div>
+              <div class="champ-info">
+                <div class="name">Fizz</div>
+                <span class="cost-badge c3">3 Gold</span>
+              </div>
+            </div>
+          </td>
+          <td><span class="role-badge r-flex">💧 Carry Flex</span></td>
+          <td><div class="traits-cell"><span class="ttag tt-y">Yordle</span><span class="ttag tt-o">Bruiser</span></div></td>
+          <td>
+            <div class="items-cell">
+              <div class="item-slot">
+                <img src="https://sunderarmor.com/items/ThiefsGloves.png" alt="Thief's Gloves" />
+                <div class="ilabel">Thief's Gloves</div>
+              </div>
+              <div class="item-slot">
+                <img src="https://sunderarmor.com/items/ThiefsGloves.png" alt="Thief's Gloves" />
+                <div class="ilabel">Thief's Gloves</div>
+              </div>
+              <div class="item-slot">
+                <img src="https://sunderarmor.com/items/ThiefsGloves.png" alt="Thief's Gloves" />
+                <div class="ilabel">Thief's Gloves</div>
+              </div>
+            </div>
+          </td>
+          <td><div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span></div></td>
+          <td><p class="note">Desbloquear: 5 Yordle/Bilgewater en tablero siendo nivel 7. Solo Thief's Gloves.</p></td>
         </tr>
 
         <!-- KENNEN -->
         <tr>
           <td>
             <div class="champ-cell">
-              <div class="champ-img-wrap">
-                <img src="https://raw.communitydragon.org/latest/game/assets/characters/kennen/hud/kennen_square.png" alt="Kennen" />
+              <div class="portrait-wrap">
+                <img src="https://sunderarmor.com/characters/Skin/16/Kennen.png" alt="Kennen" />
               </div>
               <div class="champ-info">
                 <div class="name">Kennen</div>
-                <span class="cost-badge cost-1">1 Gold</span>
+                <span class="cost-badge c3">3 Gold</span>
               </div>
             </div>
           </td>
-          <td><span class="role-badge role-support">🌟 Utility</span></td>
-          <td>
-            <div class="traits-cell">
-              <span class="trait-tag t-yordle">Yordle</span>
-              <span class="trait-tag t-other">Invoker</span>
-            </div>
-          </td>
+          <td><span class="role-badge r-tank">🛡️ Tank / CC</span></td>
+          <td><div class="traits-cell"><span class="ttag tt-y">Yordle</span><span class="ttag tt-o">Invoker</span></div></td>
           <td>
             <div class="items-cell">
               <div class="item-slot">
-                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Frozen_Heart_item.png/100px-Frozen_Heart_item.png" alt="Frozen Heart" />
-                <div class="item-label">Frozen Heart</div>
+                <img src="https://sunderarmor.com/items/DragonsClaw.png" alt="Dragon's Claw" />
+                <div class="ilabel">Dragon's Claw</div>
               </div>
               <div class="item-slot">
-                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Ionic_Spark_TFT_item.png/100px-Ionic_Spark_TFT_item.png" alt="Ionic Spark" />
-                <div class="item-label">Ionic Spark</div>
+                <img src="https://sunderarmor.com/items/BrambleVest.png" alt="Bramble Vest" />
+                <div class="ilabel">Bramble Vest</div>
               </div>
               <div class="item-slot">
-                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Gargoyle_Stoneplate_TFT_item.png/100px-Gargoyle_Stoneplate_TFT_item.png" alt="Gargoyle Stoneplate" />
-                <div class="item-label">Gargoyle Stoneplate</div>
+                <img src="https://sunderarmor.com/items/WarmogsArmor.png" alt="Warmog's Armor" />
+                <div class="ilabel">Warmog's Armor</div>
               </div>
             </div>
           </td>
-          <td><div class="stars"><span class="star">★</span><span class="star">★</span><span class="star empty">★</span><span class="star empty">★</span><span class="star empty">★</span></div></td>
-          <td><p class="note">Activa Invoker. Frozen Heart reduce velocidad de ataque enemiga.</p></td>
+          <td><div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span></div></td>
+          <td><p class="note">Frontline + CC masivo. Dragon's Claw bloquea el daño AP enemigo.</p></td>
+        </tr>
+
+        <!-- LULU -->
+        <tr>
+          <td>
+            <div class="champ-cell">
+              <div class="portrait-wrap">
+                <img src="https://sunderarmor.com/characters/Skin/16/Lulu.png" alt="Lulu" />
+              </div>
+              <div class="champ-info">
+                <div class="name">Lulu</div>
+                <span class="cost-badge c3">3 Gold</span>
+              </div>
+            </div>
+          </td>
+          <td><span class="role-badge r-flex">🌟 Support</span></td>
+          <td><div class="traits-cell"><span class="ttag tt-y">Yordle</span><span class="ttag tt-o">Invoker</span></div></td>
+          <td>
+            <div class="items-cell">
+              <div class="item-slot">
+                <img src="https://sunderarmor.com/items/ZekesHerald.png" alt="Zeke's Herald" />
+                <div class="ilabel">Zeke's Herald</div>
+              </div>
+              <div class="item-slot">
+                <img src="https://sunderarmor.com/items/IonicSpark.png" alt="Ionic Spark" />
+                <div class="ilabel">Ionic Spark</div>
+              </div>
+              <div class="item-slot">
+                <img src="https://sunderarmor.com/items/ArchangelsStaff.png" alt="Archangel's Staff" />
+                <div class="ilabel">Archangel's Staff</div>
+              </div>
+            </div>
+          </td>
+          <td><div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span><span class="star empty">★</span></div></td>
+          <td><p class="note">Ionic Spark shredea MR. Zeke's da velocidad de ataque al carry más cercano.</p></td>
+        </tr>
+
+        <!-- POPPY -->
+        <tr>
+          <td>
+            <div class="champ-cell">
+              <div class="portrait-wrap">
+                <img src="https://sunderarmor.com/characters/Skin/16/Poppy.png" alt="Poppy" />
+              </div>
+              <div class="champ-info">
+                <div class="name">Poppy</div>
+                <span class="cost-badge c3">3 Gold</span>
+              </div>
+            </div>
+          </td>
+          <td><span class="role-badge r-tank">🛡️ Tank</span></td>
+          <td><div class="traits-cell"><span class="ttag tt-y">Yordle</span><span class="ttag tt-o">Bruiser</span></div></td>
+          <td>
+            <div class="items-cell">
+              <div class="item-slot">
+                <img src="https://sunderarmor.com/items/GargoyleStoneplate.png" alt="Gargoyle Stoneplate" />
+                <div class="ilabel">Gargoyle Stoneplate</div>
+              </div>
+              <div class="item-slot">
+                <img src="https://sunderarmor.com/items/SunfireCape.png" alt="Sunfire Cape" />
+                <div class="ilabel">Sunfire Cape</div>
+              </div>
+              <div class="item-slot">
+                <img src="https://sunderarmor.com/items/FrozenHeart.png" alt="Frozen Heart" />
+                <div class="ilabel">Frozen Heart</div>
+              </div>
+            </div>
+          </td>
+          <td><div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span><span class="star empty">★</span></div></td>
+          <td><p class="note">Frontline secundaria. Sunfire quema al frente. Frozen Heart reduce vel. de ataque.</p></td>
+        </tr>
+
+        <!-- RUMBLE -->
+        <tr>
+          <td>
+            <div class="champ-cell">
+              <div class="portrait-wrap">
+                <img src="https://sunderarmor.com/characters/Skin/16/Rumble.png" alt="Rumble" />
+              </div>
+              <div class="champ-info">
+                <div class="name">Rumble</div>
+                <span class="cost-badge c2">2 Gold</span>
+              </div>
+            </div>
+          </td>
+          <td><span class="role-badge r-tank">🛡️ Bruiser</span></td>
+          <td><div class="traits-cell"><span class="ttag tt-y">Yordle</span><span class="ttag tt-o">Bruiser</span></div></td>
+          <td>
+            <div class="items-cell">
+              <div class="item-slot">
+                <img src="https://sunderarmor.com/items/WarmogsArmor.png" alt="Warmog's Armor" />
+                <div class="ilabel">Warmog's Armor</div>
+              </div>
+              <div class="item-slot">
+                <img src="https://sunderarmor.com/items/BrambleVest.png" alt="Bramble Vest" />
+                <div class="ilabel">Bramble Vest</div>
+              </div>
+              <div class="item-slot">
+                <img src="https://sunderarmor.com/items/Morellonomicon.png" alt="Morellonomicon" />
+                <div class="ilabel">Morellonomicon</div>
+              </div>
+            </div>
+          </td>
+          <td><div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span><span class="star empty">★</span></div></td>
+          <td><p class="note">Tank robusto con daño secundario. Bramble Vest bloquea curas enemigas.</p></td>
+        </tr>
+
+        <!-- TRISTANA -->
+        <tr>
+          <td>
+            <div class="champ-cell">
+              <div class="portrait-wrap">
+                <img src="https://sunderarmor.com/characters/Skin/16/Tristana.png" alt="Tristana" />
+              </div>
+              <div class="champ-info">
+                <div class="name">Tristana</div>
+                <span class="cost-badge c2">2 Gold</span>
+              </div>
+            </div>
+          </td>
+          <td><span class="role-badge r-flex">💥 Duelist</span></td>
+          <td><div class="traits-cell"><span class="ttag tt-y">Yordle</span><span class="ttag tt-o">Duelist</span></div></td>
+          <td>
+            <div class="items-cell">
+              <div class="item-slot">
+                <img src="https://sunderarmor.com/items/InfinityEdge.png" alt="Infinity Edge" />
+                <div class="ilabel">Infinity Edge</div>
+              </div>
+              <div class="item-slot">
+                <img src="https://sunderarmor.com/items/GuinsoosRageblade.png" alt="Guinsoo's Rageblade" />
+                <div class="ilabel">Guinsoo's Rageblade</div>
+              </div>
+              <div class="item-slot">
+                <img src="https://sunderarmor.com/items/LastWhisper.png" alt="Last Whisper" />
+                <div class="ilabel">Last Whisper</div>
+              </div>
+            </div>
+          </td>
+          <td><div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span><span class="star empty">★</span></div></td>
+          <td><p class="note">Carry AD de respaldo. Usa sus items solo si los carries AP están cubiertos.</p></td>
+        </tr>
+
+        <!-- KOBUKO & YUUMI -->
+        <tr>
+          <td>
+            <div class="champ-cell">
+              <div class="portrait-wrap unlock">
+                <img src="https://raw.communitydragon.org/latest/game/assets/characters/yuumi/hud/yuumi_square.png" alt="Kobuko & Yuumi" />
+                <span class="plabel unlock">🔓</span>
+              </div>
+              <div class="champ-info">
+                <div class="name">Kobuko &amp; Yuumi</div>
+                <span class="cost-badge c4">4 Gold</span>
+              </div>
+            </div>
+          </td>
+          <td><span class="role-badge r-tank">🛡️ Tank Duelist</span></td>
+          <td><div class="traits-cell"><span class="ttag tt-y">Yordle</span><span class="ttag tt-o">Duelist</span></div></td>
+          <td>
+            <div class="items-cell">
+              <div class="item-slot">
+                <img src="https://sunderarmor.com/items/GargoyleStoneplate.png" alt="Gargoyle Stoneplate" />
+                <div class="ilabel">Gargoyle Stoneplate</div>
+              </div>
+              <div class="item-slot">
+                <img src="https://sunderarmor.com/items/DragonsClaw.png" alt="Dragon's Claw" />
+                <div class="ilabel">Dragon's Claw</div>
+              </div>
+              <div class="item-slot">
+                <img src="https://sunderarmor.com/items/WarmogsArmor.png" alt="Warmog's Armor" />
+                <div class="ilabel">Warmog's Armor</div>
+              </div>
+            </div>
+          </td>
+          <td><div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span><span class="star empty">★</span></div></td>
+          <td><p class="note">Desbloquear: 6 niveles entre Bruiser/Yordle/Invoker siendo nivel 7.</p></td>
         </tr>
 
       </tbody>
     </table>
   </div>
 
-  <!-- LEYENDA ITEMS CON ICONOS REALES -->
+  <!-- TODOS LOS ITEMS -->
   <div class="legend-box">
-    <p class="legend-title">Todos los Items de la Build</p>
+    <p class="legend-title">Todos los Items — Galería Completa</p>
     <div class="legend-row">
-      <div class="legend-item">
-        <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Infinity_Edge_TFT_item.png/64px-Infinity_Edge_TFT_item.png" alt="IE" />
-        Infinity Edge
-      </div>
-      <div class="legend-item">
-        <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Guinsoo%27s_Rageblade_TFT_item.png/64px-Guinsoo%27s_Rageblade_TFT_item.png" alt="Guinsoo" />
-        Guinsoo's Rageblade
-      </div>
-      <div class="legend-item">
-        <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Last_Whisper_TFT_item.png/64px-Last_Whisper_TFT_item.png" alt="LW" />
-        Last Whisper
-      </div>
-      <div class="legend-item">
-        <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Rabadon%27s_Deathcap_TFT_item.png/64px-Rabadon%27s_Deathcap_TFT_item.png" alt="Rabadon" />
-        Rabadon's Deathcap
-      </div>
-      <div class="legend-item">
-        <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Jeweled_Gauntlet_TFT_item.png/64px-Jeweled_Gauntlet_TFT_item.png" alt="JG" />
-        Jeweled Gauntlet
-      </div>
-      <div class="legend-item">
-        <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Blue_Buff_TFT_item.png/64px-Blue_Buff_TFT_item.png" alt="Blue Buff" />
-        Blue Buff
-      </div>
-      <div class="legend-item">
-        <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Morellonomicon_TFT_item.png/64px-Morellonomicon_TFT_item.png" alt="Morellos" />
-        Morellonomicon
-      </div>
-      <div class="legend-item">
-        <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Warmog%27s_Armor_TFT_item.png/64px-Warmog%27s_Armor_TFT_item.png" alt="Warmog" />
-        Warmog's Armor
-      </div>
-      <div class="legend-item">
-        <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Sunfire_Cape_TFT_item.png/64px-Sunfire_Cape_TFT_item.png" alt="Sunfire" />
-        Sunfire Cape
-      </div>
-      <div class="legend-item">
-        <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Ionic_Spark_TFT_item.png/64px-Ionic_Spark_TFT_item.png" alt="Ionic Spark" />
-        Ionic Spark
-      </div>
-      <div class="legend-item">
-        <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Frozen_Heart_item.png/64px-Frozen_Heart_item.png" alt="Frozen Heart" />
-        Frozen Heart
-      </div>
-      <div class="legend-item">
-        <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Bramble_Vest_TFT_item.png/64px-Bramble_Vest_TFT_item.png" alt="Bramble Vest" />
-        Bramble Vest
-      </div>
-      <div class="legend-item">
-        <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Archangel%27s_Staff_TFT_item.png/64px-Archangel%27s_Staff_TFT_item.png" alt="Archangel" />
-        Archangel's Staff
-      </div>
-      <div class="legend-item">
-        <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Zeke%27s_Herald_TFT_item.png/64px-Zeke%27s_Herald_TFT_item.png" alt="Zeke's" />
-        Zeke's Herald
-      </div>
-      <div class="legend-item">
-        <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Gargoyle_Stoneplate_TFT_item.png/64px-Gargoyle_Stoneplate_TFT_item.png" alt="Gargoyle" />
-        Gargoyle Stoneplate
-      </div>
-      <div class="legend-item">
-        <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Dragon%27s_Claw_TFT_item.png/64px-Dragon%27s_Claw_TFT_item.png" alt="Dragon's Claw" />
-        Dragon's Claw
-      </div>
+      <div class="legend-chip"><img src="https://sunderarmor.com/items/StatikkShiv.png" alt="Statikk Shiv" /> Statikk Shiv</div>
+      <div class="legend-chip"><img src="https://sunderarmor.com/items/Morellonomicon.png" alt="Morellonomicon" /> Morellonomicon</div>
+      <div class="legend-chip"><img src="https://sunderarmor.com/items/JeweledGauntlet.png" alt="Jeweled Gauntlet" /> Jeweled Gauntlet</div>
+      <div class="legend-chip"><img src="https://sunderarmor.com/items/SpearofShojin.png" alt="Spear of Shojin" /> Spear of Shojin</div>
+      <div class="legend-chip"><img src="https://sunderarmor.com/items/RabadonsDeathcap.png" alt="Rabadon's Deathcap" /> Rabadon's Deathcap</div>
+      <div class="legend-chip"><img src="https://sunderarmor.com/items/HextechGunblade.png" alt="Hextech Gunblade" /> Hextech Gunblade</div>
+      <div class="legend-chip"><img src="https://sunderarmor.com/items/ThiefsGloves.png" alt="Thief's Gloves" /> Thief's Gloves</div>
+      <div class="legend-chip"><img src="https://sunderarmor.com/items/DragonsClaw.png" alt="Dragon's Claw" /> Dragon's Claw</div>
+      <div class="legend-chip"><img src="https://sunderarmor.com/items/BrambleVest.png" alt="Bramble Vest" /> Bramble Vest</div>
+      <div class="legend-chip"><img src="https://sunderarmor.com/items/WarmogsArmor.png" alt="Warmog's Armor" /> Warmog's Armor</div>
+      <div class="legend-chip"><img src="https://sunderarmor.com/items/ZekesHerald.png" alt="Zeke's Herald" /> Zeke's Herald</div>
+      <div class="legend-chip"><img src="https://sunderarmor.com/items/IonicSpark.png" alt="Ionic Spark" /> Ionic Spark</div>
+      <div class="legend-chip"><img src="https://sunderarmor.com/items/ArchangelsStaff.png" alt="Archangel's Staff" /> Archangel's Staff</div>
+      <div class="legend-chip"><img src="https://sunderarmor.com/items/GargoyleStoneplate.png" alt="Gargoyle Stoneplate" /> Gargoyle Stoneplate</div>
+      <div class="legend-chip"><img src="https://sunderarmor.com/items/SunfireCape.png" alt="Sunfire Cape" /> Sunfire Cape</div>
+      <div class="legend-chip"><img src="https://sunderarmor.com/items/FrozenHeart.png" alt="Frozen Heart" /> Frozen Heart</div>
+      <div class="legend-chip"><img src="https://sunderarmor.com/items/InfinityEdge.png" alt="Infinity Edge" /> Infinity Edge</div>
+      <div class="legend-chip"><img src="https://sunderarmor.com/items/GuinsoosRageblade.png" alt="Guinsoo's Rageblade" /> Guinsoo's Rageblade</div>
+      <div class="legend-chip"><img src="https://sunderarmor.com/items/LastWhisper.png" alt="Last Whisper" /> Last Whisper</div>
+      <div class="legend-chip"><img src="https://sunderarmor.com/items/BlueBuff.png" alt="Blue Buff" /> Blue Buff</div>
     </div>
   </div>
 
 </div>
 
 <footer>
-  <p>TFT · Yordle Build Guide · Imágenes: Community Dragon + League of Legends Wiki</p>
-  <p style="margin-top:.3rem">Las estadísticas pueden variar según el parche actual del juego.</p>
+  <p>TFT Set 16: Lore &amp; Legends · Yordle Build Guide</p>
+  <p>Imágenes: <a href="https://sunderarmor.com">sunderarmor.com</a> · <a href="https://raw.communitydragon.org">communitydragon.org</a> · Meta: <a href="https://tftacademy.com">tftacademy.com</a></p>
 </footer>
 
 </body>
