@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TFT — Build Yordle</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600&display=swap');
+
+    :root {
+      --gold:    #c89b3c;
+      --gold-light: #f0e6a2;
+      --dark:    #0a0e1a;
+      --panel:   #111827;
+      --card:    #1a2235;
+      --border:  #2a3a55;
+      --yordle:  #9b59b6;
+      --yordle-light: #d7a8f0;
+      --text:    #c8d6e8;
+      --muted:   #6b7e9a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--dark);
+      background-image:
+        radial-gradient(ellipse at 20% 50%, rgba(155,89,182,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(200,155,60,0.06) 0%, transparent 50%);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      padding: 2rem 1rem 4rem;
+    }
+
+    /* ── HEADER ── */
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .badge-trait {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: linear-gradient(135deg, #4b2069, #7b3fa6);
+      border: 1px solid var(--yordle);
+      border-radius: 999px;
+      padding: .35rem 1rem;
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--yordle-light);
+      margin-bottom: .9rem;
+    }
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 60%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: .04em;
+    }
+    .subtitle {
+      color: var(--muted);
+      font-size: .9rem;
+      margin-top: .5rem;
+    }
+
+    /* ── GRID PRINCIPAL ── */
+    .main-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.8rem;
+    }
+
+    /* ── SECTION TITLES ── */
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      color: var(--gold);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      border-left: 3px solid var(--gold);
+      padding-left: .75rem;
+      margin-bottom: 1rem;
+    }
+
+    /* ── TRAITS BAR ── */
+    .traits-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+    }
+    .trait-chip {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .4rem .8rem;
+      font-size: .82rem;
+      font-weight: 500;
+    }
+    .trait-chip .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .trait-chip.active { border-color: var(--yordle); }
+    .trait-chip.active .dot { background: var(--yordle); box-shadow: 0 0 6px var(--yordle); }
+    .trait-chip.secondary .dot { background: var(--gold); }
+    .trait-chip.secondary { border-color: rgba(200,155,60,.4); }
+    .trait-count {
+      background: var(--yordle);
+      color: #fff;
+      border-radius: 4px;
+      font-size: .72rem;
+      font-weight: 700;
+      padding: 1px 5px;
+      margin-left: .2rem;
+    }
+    .trait-count.gold-badge {
+      background: var(--gold);
+      color: #0a0e1a;
+    }
+
+    /* ── CHAMPIONS BOARD ── */
+    .champions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 1rem;
+    }
+    .champ-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: .9rem;
+      text-align: center;
+      position: relative;
+      transition: transform .2s, border-color .2s;
+    }
+    .champ-card:hover { transform: translateY(-3px); border-color: var(--yordle); }
+    .champ-card.carry { border-color: var(--gold); }
+    .champ-card.carry::before {
+      content: '★ CARRY';
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: #0a0e1a;
+      font-size: .6rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      border-radius: 999px;
+      padding: 2px 8px;
+      white-space: nowrap;
+    }
+    .champ-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      margin: 0 auto .6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      border: 2px solid var(--border);
+      background: linear-gradient(135deg, #1e2d45, #0d1626);
+    }
+    .champ-card.carry .champ-avatar {
+      border-color: var(--gold);
+      box-shadow: 0 0 14px rgba(200,155,60,.35);
+    }
+    .champ-name {
+      font-weight: 600;
+      font-size: .88rem;
+      color: #e8f0f8;
+      margin-bottom: .25rem;
+    }
+    .champ-cost {
+      font-size: .72rem;
+      font-weight: 700;
+      border-radius: 4px;
+      padding: 1px 6px;
+      display: inline-block;
+    }
+    .cost-1 { background: #4a5568; color: #e2e8f0; }
+    .cost-2 { background: #276749; color: #9ae6b4; }
+    .cost-3 { background: #2b6cb0; color: #90cdf4; }
+    .cost-4 { background: #553c9a; color: #d6bcfa; }
+    .cost-5 { background: #744210; color: #f6e05e; }
+    .champ-traits {
+      margin-top: .45rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: .25rem;
+    }
+    .tag {
+      font-size: .65rem;
+      background: rgba(155,89,182,.18);
+      color: var(--yordle-light);
+      border-radius: 4px;
+      padding: 1px 5px;
+      border: 1px solid rgba(155,89,182,.3);
+    }
+    .tag.other {
+      background: rgba(200,155,60,.12);
+      color: var(--gold-light);
+      border-color: rgba(200,155,60,.25);
+    }
+
+    /* ── ITEMS ── */
+    .carries-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.2rem;
+    }
+    .carry-item-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.1rem;
+    }
+    .carry-header {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      margin-bottom: .9rem;
+    }
+    .carry-avatar-sm {
+      font-size: 1.5rem;
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #1e2d45, #0d1626);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--gold);
+      flex-shrink: 0;
+    }
+    .carry-info h3 { font-size: .92rem; font-weight: 600; color: var(--gold-light); }
+    .carry-info p  { font-size: .75rem; color: var(--muted); margin-top: 2px; }
+
+    .items-row {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+    }
+    .item-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .3rem;
+    }
+    .item-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 8px;
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      position: relative;
+      transition: transform .15s;
+      cursor: default;
+    }
+    .item-icon:hover { transform: scale(1.12); border-color: var(--gold); }
+    .item-name {
+      font-size: .62rem;
+      color: var(--muted);
+      text-align: center;
+      max-width: 58px;
+      line-height: 1.2;
+    }
+
+    /* item color themes */
+    .item-ap    { background: linear-gradient(135deg, #2a1f4e, #4a2d8a); border-color: #7c5cdb; }
+    .item-tank  { background: linear-gradient(135deg, #1a3a2a, #2d6040); border-color: #4a9e70; }
+    .item-ad    { background: linear-gradient(135deg, #3a2a1a, #7a4a1a); border-color: #c8762a; }
+    .item-mana  { background: linear-gradient(135deg, #1a2a3a, #2a4a6a); border-color: #4a8ab8; }
+    .item-omni  { background: linear-gradient(135deg, #3a2a1a, #6a4a1a); border-color: var(--gold); }
+    .item-crit  { background: linear-gradient(135deg, #3a1a1a, #7a2a2a); border-color: #c84a4a; }
+    .item-shred { background: linear-gradient(135deg, #2a1a3a, #5a2a7a); border-color: #a04ad0; }
+
+    /* ── AUGMENTS ── */
+    .augments-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: .9rem;
+    }
+    .augment-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: .9rem 1rem;
+      display: flex;
+      gap: .7rem;
+      align-items: flex-start;
+    }
+    .augment-card.prismatic { border-color: #e879f9; }
+    .augment-card.gold-aug  { border-color: var(--gold); }
+    .augment-card.silver-aug{ border-color: #94a3b8; }
+    .aug-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+    .aug-name { font-size: .82rem; font-weight: 600; color: #e8f0f8; margin-bottom: .2rem; }
+    .aug-tier {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      border-radius: 4px;
+      padding: 1px 6px;
+      display: inline-block;
+      margin-bottom: .3rem;
+    }
+    .t-prismatic { background: #a21caf; color: #f5d0fe; }
+    .t-gold      { background: #92400e; color: #fde68a; }
+    .t-silver    { background: #334155; color: #cbd5e1; }
+    .aug-desc { font-size: .72rem; color: var(--muted); line-height: 1.5; }
+
+    /* ── POSITIONING ── */
+    .board {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      grid-template-rows: repeat(4, 60px);
+      gap: 6px;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+    .hex {
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      position: relative;
+      transition: background .2s;
+    }
+    .hex.occupied {
+      background: rgba(155,89,182,.12);
+      border-color: rgba(155,89,182,.35);
+    }
+    .hex.occupied:hover { background: rgba(155,89,182,.22); }
+    .hex-label {
+      position: absolute;
+      bottom: 2px;
+      left: 0; right: 0;
+      text-align: center;
+      font-size: .55rem;
+      color: var(--muted);
+      line-height: 1;
+    }
+    .board-legend {
+      text-align: center;
+      font-size: .75rem;
+      color: var(--muted);
+      margin-top: .6rem;
+    }
+
+    /* ── TIPS ── */
+    .tips-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: .7rem;
+    }
+    .tips-list li {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .75rem 1rem;
+      font-size: .82rem;
+      line-height: 1.55;
+      display: flex;
+      gap: .6rem;
+      align-items: flex-start;
+    }
+    .tips-list li span.icon { font-size: 1rem; flex-shrink: 0; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      font-size: .72rem;
+      color: var(--muted);
+    }
+
+    /* ── DIVIDER ── */
+    .section-wrap {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.4rem 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="badge-trait">🐾 Guía de Comp</div>
+  <h1>Yordle Build Guide</h1>
+  <p class="subtitle">TFT · Comp Yordle 6 · Temporada actual · Top 4 consistente</p>
+</header>
+
+<div class="main-grid">
+
+  <!-- TRAITS -->
+  <div class="section-wrap">
+    <p class="section-title">Traits Activos</p>
+    <div class="traits-row">
+      <div class="trait-chip active">
+        <span class="dot"></span> Yordle <span class="trait-count">6</span>
+      </div>
+      <div class="trait-chip secondary">
+        <span class="dot"></span> Invoker <span class="trait-count gold-badge">2</span>
+      </div>
+      <div class="trait-chip secondary">
+        <span class="dot"></span> Bastion <span class="trait-count gold-badge">2</span>
+      </div>
+      <div class="trait-chip secondary">
+        <span class="dot"></span> Duelist <span class="trait-count">2</span>
+      </div>
+      <div class="trait-chip secondary">
+        <span class="dot"></span> Piltover <span class="trait-count">2</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHAMPIONS -->
+  <div class="section-wrap">
+    <p class="section-title">Campeones</p>
+    <div class="champions-grid">
+
+      <div class="champ-card">
+        <div class="champ-avatar">🐰</div>
+        <div class="champ-name">Poppy</div>
+        <span class="champ-cost cost-1">1 Gold</span>
+        <div class="champ-traits">
+          <span class="tag">Yordle</span>
+          <span class="tag other">Bastion</span>
+        </div>
+      </div>
+
+      <div class="champ-card">
+        <div class="champ-avatar">🦊</div>
+        <div class="champ-name">Kennen</div>
+        <span class="champ-cost cost-1">1 Gold</span>
+        <div class="champ-traits">
+          <span class="tag">Yordle</span>
+          <span class="tag other">Invoker</span>
+        </div>
+      </div>
+
+      <div class="champ-card">
+        <div class="champ-avatar">🍄</div>
+        <div class="champ-name">Teemo</div>
+        <span class="champ-cost cost-2">2 Gold</span>
+        <div class="champ-traits">
+          <span class="tag">Yordle</span>
+          <span class="tag other">Piltover</span>
+        </div>
+      </div>
+
+      <div class="champ-card carry">
+        <div class="champ-avatar">🔫</div>
+        <div class="champ-name">Tristana</div>
+        <span class="champ-cost cost-2">2 Gold</span>
+        <div class="champ-traits">
+          <span class="tag">Yordle</span>
+          <span class="tag other">Duelist</span>
+        </div>
+      </div>
+
+      <div class="champ-card carry">
+        <div class="champ-avatar">✨</div>
+        <div class="champ-name">Lulu</div>
+        <span class="champ-cost cost-3">3 Gold</span>
+        <div class="champ-traits">
+          <span class="tag">Yordle</span>
+          <span class="tag other">Invoker</span>
+        </div>
+      </div>
+
+      <div class="champ-card">
+        <div class="champ-avatar">🔧</div>
+        <div class="champ-name">Heimerdinger</div>
+        <span class="champ-cost cost-3">3 Gold</span>
+        <div class="champ-traits">
+          <span class="tag">Yordle</span>
+          <span class="tag other">Piltover</span>
+        </div>
+      </div>
+
+      <div class="champ-card carry">
+        <div class="champ-avatar">💜</div>
+        <div class="champ-name">Vex</div>
+        <span class="champ-cost cost-4">4 Gold</span>
+        <div class="champ-traits">
+          <span class="tag">Yordle</span>
+          <span class="tag other">Bastion</span>
+        </div>
+      </div>
+
+      <div class="champ-card">
+        <div class="champ-avatar">🤖</div>
+        <div class="champ-name">Rumble</div>
+        <span class="champ-cost cost-4">4 Gold</span>
+        <div class="champ-traits">
+          <span class="tag">Yordle</span>
+          <span class="tag other">Duelist</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ITEMS POR CARRY -->
+  <div class="section-wrap">
+    <p class="section-title">Items por Carry</p>
+    <div class="carries-section">
+
+      <!-- Tristana -->
+      <div class="carry-item-card">
+        <div class="carry-header">
+          <div class="carry-avatar-sm">🔫</div>
+          <div class="carry-info">
+            <h3>Tristana — Carry AD</h3>
+            <p>Daño físico + velocidad de ataque</p>
+          </div>
+        </div>
+        <div class="items-row">
+          <div class="item-box">
+            <div class="item-icon item-ad">⚔️</div>
+            <div class="item-name">Guantelete Infinito</div>
+          </div>
+          <div class="item-box">
+            <div class="item-icon item-ad">🏹</div>
+            <div class="item-name">Arco de Recurva</div>
+          </div>
+          <div class="item-box">
+            <div class="item-icon item-crit">🗡️</div>
+            <div class="item-name">Filo de Furia</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lulu -->
+      <div class="carry-item-card">
+        <div class="carry-header">
+          <div class="carry-avatar-sm">✨</div>
+          <div class="carry-info">
+            <h3>Lulu — Soporte / AP</h3>
+            <p>Poder de habilidad + utilidad</p>
+          </div>
+        </div>
+        <div class="items-row">
+          <div class="item-box">
+            <div class="item-icon item-ap">🔮</div>
+            <div class="item-name">Sombrero de Rabadon</div>
+          </div>
+          <div class="item-box">
+            <div class="item-icon item-mana">💎</div>
+            <div class="item-name">Bastón de Mana</div>
+          </div>
+          <div class="item-box">
+            <div class="item-icon item-omni">⚡</div>
+            <div class="item-name">Rylai's Crystal Scepter</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vex -->
+      <div class="carry-item-card">
+        <div class="carry-header">
+          <div class="carry-avatar-sm">💜</div>
+          <div class="carry-info">
+            <h3>Vex — Carry AP</h3>
+            <p>Burst mágico + penetración</p>
+          </div>
+        </div>
+        <div class="items-row">
+          <div class="item-box">
+            <div class="item-icon item-ap">🔮</div>
+            <div class="item-name">Sombrero de Rabadon</div>
+          </div>
+          <div class="item-box">
+            <div class="item-icon item-crit">💍</div>
+            <div class="item-name">Guantelete Enjoyado</div>
+          </div>
+          <div class="item-box">
+            <div class="item-icon item-mana">💙</div>
+            <div class="item-name">Blue Buff</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Poppy / Tanque -->
+      <div class="carry-item-card">
+        <div class="carry-header">
+          <div class="carry-avatar-sm">🐰</div>
+          <div class="carry-info">
+            <h3>Poppy / Rumble — Tanque</h3>
+            <p>Armadura + absorción de daño</p>
+          </div>
+        </div>
+        <div class="items-row">
+          <div class="item-box">
+            <div class="item-icon item-tank">🛡️</div>
+            <div class="item-name">Chaleco de Placa</div>
+          </div>
+          <div class="item-box">
+            <div class="item-icon item-tank">❤️</div>
+            <div class="item-name">Warmog's Armor</div>
+          </div>
+          <div class="item-box">
+            <div class="item-icon item-shred">🌀</div>
+            <div class="item-name">Sunfire Cape</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- GALERÍA DE ITEMS CLAVE -->
+  <div class="section-wrap">
+    <p class="section-title">Items Clave — Todos los Roles</p>
+    <div class="items-row" style="flex-wrap:wrap; gap:.8rem;">
+
+      <div class="item-box">
+        <div class="item-icon item-ap" style="width:60px;height:60px;font-size:1.6rem">🔮</div>
+        <div class="item-name">Rabadon's Deathcap</div>
+      </div>
+      <div class="item-box">
+        <div class="item-icon item-mana" style="width:60px;height:60px;font-size:1.6rem">💙</div>
+        <div class="item-name">Blue Buff</div>
+      </div>
+      <div class="item-box">
+        <div class="item-icon item-crit" style="width:60px;height:60px;font-size:1.6rem">💍</div>
+        <div class="item-name">Jeweled Gauntlet</div>
+      </div>
+      <div class="item-box">
+        <div class="item-icon item-ap" style="width:60px;height:60px;font-size:1.6rem">🔥</div>
+        <div class="item-name">Morellonomicon</div>
+      </div>
+      <div class="item-box">
+        <div class="item-icon item-ad" style="width:60px;height:60px;font-size:1.6rem">⚔️</div>
+        <div class="item-name">Infinity Edge</div>
+      </div>
+      <div class="item-box">
+        <div class="item-icon item-ad" style="width:60px;height:60px;font-size:1.6rem">🏹</div>
+        <div class="item-name">Guinsoo's Rageblade</div>
+      </div>
+      <div class="item-box">
+        <div class="item-icon item-crit" style="width:60px;height:60px;font-size:1.6rem">⚡</div>
+        <div class="item-name">Statikk Shiv</div>
+      </div>
+      <div class="item-box">
+        <div class="item-icon item-tank" style="width:60px;height:60px;font-size:1.6rem">🛡️</div>
+        <div class="item-name">Warmog's Armor</div>
+      </div>
+      <div class="item-box">
+        <div class="item-icon item-tank" style="width:60px;height:60px;font-size:1.6rem">🌀</div>
+        <div class="item-name">Sunfire Cape</div>
+      </div>
+      <div class="item-box">
+        <div class="item-icon item-omni" style="width:60px;height:60px;font-size:1.6rem">💛</div>
+        <div class="item-name">Zeke's Herald</div>
+      </div>
+      <div class="item-box">
+        <div class="item-icon item-shred" style="width:60px;height:60px;font-size:1.6rem">🌑</div>
+        <div class="item-name">Ionic Spark</div>
+      </div>
+      <div class="item-box">
+        <div class="item-icon item-mana" style="width:60px;height:60px;font-size:1.6rem">🧊</div>
+        <div class="item-name">Frozen Heart</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- POSICIONAMIENTO -->
+  <div class="section-wrap">
+    <p class="section-title">Posicionamiento Recomendado</p>
+    <div class="board">
+      <!-- Fila 1 (backline) -->
+      <div class="hex"></div>
+      <div class="hex occupied">🔧<div class="hex-label">Heimer</div></div>
+      <div class="hex"></div>
+      <div class="hex occupied">✨<div class="hex-label">Lulu</div></div>
+      <div class="hex"></div>
+      <div class="hex occupied">🦊<div class="hex-label">Kennen</div></div>
+      <div class="hex"></div>
+
+      <!-- Fila 2 -->
+      <div class="hex occupied">🐰<div class="hex-label">Poppy</div></div>
+      <div class="hex"></div>
+      <div class="hex occupied">💜<div class="hex-label">Vex</div></div>
+      <div class="hex"></div>
+      <div class="hex occupied">🔫<div class="hex-label">Tristana</div></div>
+      <div class="hex"></div>
+      <div class="hex"></div>
+
+      <!-- Fila 3 -->
+      <div class="hex"></div>
+      <div class="hex occupied">🤖<div class="hex-label">Rumble</div></div>
+      <div class="hex"></div>
+      <div class="hex"></div>
+      <div class="hex"></div>
+      <div class="hex occupied">🍄<div class="hex-label">Teemo</div></div>
+      <div class="hex"></div>
+
+      <!-- Fila 4 (frontline) -->
+      <div class="hex"></div>
+      <div class="hex"></div>
+      <div class="hex"></div>
+      <div class="hex"></div>
+      <div class="hex"></div>
+      <div class="hex"></div>
+      <div class="hex"></div>
+    </div>
+    <p class="board-legend">▲ Backline (fila 1) — Frontline (fila 4) ▼ · Tristana y Vex en flancos protegidos</p>
+  </div>
+
+  <!-- AUGMENTS -->
+  <div class="section-wrap">
+    <p class="section-title">Mejores Augments</p>
+    <div class="augments-grid">
+
+      <div class="augment-card prismatic">
+        <div class="aug-icon">🟣</div>
+        <div>
+          <div class="aug-tier t-prismatic">Prismático</div>
+          <div class="aug-name">Yordle Population Boom</div>
+          <div class="aug-desc">Todos tus Yordles ganan +20% de todos los stats al activar el trait.</div>
+        </div>
+      </div>
+
+      <div class="augment-card prismatic">
+        <div class="aug-icon">💫</div>
+        <div>
+          <div class="aug-tier t-prismatic">Prismático</div>
+          <div class="aug-name">Tiny But Deadly III</div>
+          <div class="aug-desc">Tus Yordles ganan +50% de daño de habilidad.</div>
+        </div>
+      </div>
+
+      <div class="augment-card gold-aug">
+        <div class="aug-icon">⚡</div>
+        <div>
+          <div class="aug-tier t-gold">Oro</div>
+          <div class="aug-name">Gadget Expert II</div>
+          <div class="aug-desc">Heimerdinger y Rumble reducen su maná inicial al 0 al inicio del combate.</div>
+        </div>
+      </div>
+
+      <div class="augment-card gold-aug">
+        <div class="aug-icon">🔮</div>
+        <div>
+          <div class="aug-tier t-gold">Oro</div>
+          <div class="aug-name">Ability Power II</div>
+          <div class="aug-desc">Todos tus campeones ganan +20 de poder de habilidad.</div>
+        </div>
+      </div>
+
+      <div class="augment-card silver-aug">
+        <div class="aug-icon">💰</div>
+        <div>
+          <div class="aug-tier t-silver">Plata</div>
+          <div class="aug-name">Yordle Loot</div>
+          <div class="aug-desc">Al perder 3 combates seguidos, recibes un cofre de items Yordle.</div>
+        </div>
+      </div>
+
+      <div class="augment-card silver-aug">
+        <div class="aug-icon">🛡️</div>
+        <div>
+          <div class="aug-tier t-silver">Plata</div>
+          <div class="aug-name">Stand United</div>
+          <div class="aug-desc">Tus unidades ganan +10 de armadura y resistencia mágica por cada aliado vivo.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TIPS -->
+  <div class="section-wrap">
+    <p class="section-title">Tips de Juego</p>
+    <ul class="tips-list">
+      <li><span class="icon">🎯</span> Prioriza llevar a <strong>Tristana</strong> y <strong>Vex</strong> a 3 estrellas — son los carries principales de la comp.</li>
+      <li><span class="icon">💰</span> Ahorra hasta 50 de oro en early game para hacer rolleos agresivos en nivel 6–7.</li>
+      <li><span class="icon">⚡</span> <strong>Blue Buff en Vex</strong> es prioridad si tenés componentes de mana — le permite castear constantemente.</li>
+      <li><span class="icon">🛡️</span> Pon los tanques al frente (Poppy, Rumble) para absorber daño mientras los carries disparán.</li>
+      <li><span class="icon">🔮</span> Si ves Rabadon en la tienda, priorízalo para Vex o Lulu — potencia toda la comp.</li>
+      <li><span class="icon">📍</span> Tristana en el flanco esquiva AOE frontal — no la pongas en el centro.</li>
+      <li><span class="icon">⚠️</span> Evitá splashear items — concentrá los mejores en Tristana, Vex y Lulu.</li>
+      <li><span class="icon">🏆</span> Con 6 Yordles activos el trait te da evasión de hechizos pasiva — difícil de matar.</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  <p>TFT Build Guide · Yordle 6 Comp · Creado con ❤️</p>
+  <p style="margin-top:.3rem">Las estadísticas pueden variar según el parche actual del juego.</p>
+</footer>
+
+</body>
+</html>
