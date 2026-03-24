@@ -25,18 +25,16 @@
     body {
       background: var(--dark);
       background-image:
-        radial-gradient(ellipse at 20% 50%, rgba(155,89,182,.08) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 20%, rgba(200,155,60,.06) 0%, transparent 50%);
+        radial-gradient(ellipse at 20% 50%, rgba(155,89,182,.1) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(200,155,60,.07) 0%, transparent 50%);
       color: var(--text);
       font-family: 'Inter', sans-serif;
       min-height: 100vh;
       padding: 2rem 1rem 4rem;
     }
 
-    header {
-      text-align: center;
-      margin-bottom: 2.5rem;
-    }
+    /* ── HEADER ── */
+    header { text-align: center; margin-bottom: 2.5rem; }
     .badge {
       display: inline-block;
       background: linear-gradient(135deg, #4b2069, #7b3fa6);
@@ -60,12 +58,9 @@
     }
     .subtitle { color: var(--muted); font-size: .88rem; margin-top: .4rem; }
 
-    .wrapper {
-      max-width: 960px;
-      margin: 0 auto;
-    }
+    .wrapper { max-width: 1050px; margin: 0 auto; }
 
-    /* ─── TABLE ─── */
+    /* ── TABLE WRAPPER ── */
     .table-wrap {
       overflow-x: auto;
       border-radius: 16px;
@@ -73,21 +68,17 @@
       background: var(--panel);
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
+    table { width: 100%; border-collapse: collapse; }
 
     thead tr {
       background: linear-gradient(90deg, #16213a, #1a2a40);
       border-bottom: 2px solid var(--gold);
     }
-
     thead th {
       padding: .85rem 1rem;
       text-align: left;
       font-family: 'Cinzel', serif;
-      font-size: .72rem;
+      font-size: .7rem;
       font-weight: 600;
       letter-spacing: .1em;
       text-transform: uppercase;
@@ -95,160 +86,158 @@
       white-space: nowrap;
     }
 
-    tbody tr {
-      border-bottom: 1px solid var(--border);
-      transition: background .15s;
-    }
+    tbody tr { border-bottom: 1px solid var(--border); transition: background .15s; }
     tbody tr:last-child { border-bottom: none; }
     tbody tr:hover { background: rgba(155,89,182,.07); }
 
-    td {
-      padding: .9rem 1rem;
-      vertical-align: middle;
-    }
+    td { padding: .85rem 1rem; vertical-align: middle; }
 
-    /* ─── CHAMPION CELL ─── */
+    /* ── CHAMPION CELL ── */
     .champ-cell {
       display: flex;
       align-items: center;
       gap: .75rem;
-      min-width: 160px;
+      min-width: 155px;
     }
-    .champ-img {
-      width: 54px;
-      height: 54px;
+    .champ-img-wrap {
+      position: relative;
+      flex-shrink: 0;
+    }
+    .champ-img-wrap img {
+      width: 56px;
+      height: 56px;
       border-radius: 10px;
       border: 2px solid var(--border);
       object-fit: cover;
-      background: #1e2d45;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.6rem;
-      flex-shrink: 0;
+      display: block;
     }
-    .champ-img.carry-border { border-color: var(--gold); box-shadow: 0 0 10px rgba(200,155,60,.3); }
-    .champ-info .name { font-weight: 600; font-size: .92rem; color: #e8f0f8; }
-    .champ-info .cost-badge {
+    .champ-img-wrap.carry img {
+      border-color: var(--gold);
+      box-shadow: 0 0 12px rgba(200,155,60,.4);
+    }
+    .carry-star {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: var(--gold);
+      color: #0a0e1a;
+      font-size: .55rem;
+      font-weight: 800;
+      border-radius: 4px;
+      padding: 1px 4px;
+      letter-spacing: .04em;
+    }
+    .champ-info .name { font-weight: 600; font-size: .9rem; color: #e8f0f8; }
+    .cost-badge {
       display: inline-block;
-      font-size: .67rem;
+      font-size: .66rem;
       font-weight: 700;
       border-radius: 4px;
       padding: 1px 6px;
-      margin-top: 2px;
+      margin-top: 3px;
     }
     .cost-1 { background: #4a5568; color: #e2e8f0; }
     .cost-2 { background: #276749; color: #9ae6b4; }
     .cost-3 { background: #2b6cb0; color: #90cdf4; }
     .cost-4 { background: #553c9a; color: #d6bcfa; }
-    .cost-5 { background: #744210; color: #f6e05e; }
 
-    /* ─── ROLE CELL ─── */
+    /* ── ROLE BADGE ── */
     .role-badge {
       display: inline-flex;
       align-items: center;
-      gap: .35rem;
+      gap: .3rem;
       border-radius: 6px;
       padding: .25rem .65rem;
-      font-size: .75rem;
+      font-size: .74rem;
       font-weight: 600;
       white-space: nowrap;
     }
-    .role-carry  { background: rgba(200,155,60,.15); color: var(--gold-light);   border: 1px solid rgba(200,155,60,.4); }
-    .role-ap     { background: rgba(124,92,219,.2);  color: #c4b5fd;             border: 1px solid rgba(124,92,219,.4); }
-    .role-tank   { background: rgba(74,158,112,.15); color: #86efac;             border: 1px solid rgba(74,158,112,.4); }
-    .role-support{ background: rgba(56,189,248,.15); color: #7dd3fc;             border: 1px solid rgba(56,189,248,.4); }
+    .role-carry  { background: rgba(200,155,60,.15);  color: var(--gold-light); border: 1px solid rgba(200,155,60,.4); }
+    .role-ap     { background: rgba(124,92,219,.2);   color: #c4b5fd;           border: 1px solid rgba(124,92,219,.4); }
+    .role-tank   { background: rgba(74,158,112,.15);  color: #86efac;           border: 1px solid rgba(74,158,112,.4); }
+    .role-support{ background: rgba(56,189,248,.15);  color: #7dd3fc;           border: 1px solid rgba(56,189,248,.4); }
 
-    /* ─── ITEMS CELL ─── */
-    .items-cell {
-      display: flex;
-      gap: .45rem;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-    .item-slot {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: .25rem;
-    }
-    .item-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 8px;
-      border: 2px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.3rem;
-      transition: transform .15s, border-color .15s;
-      cursor: default;
-      position: relative;
-    }
-    .item-icon:hover { transform: scale(1.15); }
-    .item-label {
-      font-size: .6rem;
-      color: var(--muted);
-      text-align: center;
-      max-width: 54px;
-      line-height: 1.2;
-    }
-
-    /* item color variants */
-    .i-ap    { background: linear-gradient(135deg, #2a1f4e, #4a2d8a); border-color: #7c5cdb; }
-    .i-ad    { background: linear-gradient(135deg, #3a2a1a, #7a4a1a); border-color: #c8762a; }
-    .i-tank  { background: linear-gradient(135deg, #1a3a2a, #2d6040); border-color: #4a9e70; }
-    .i-mana  { background: linear-gradient(135deg, #1a2a3a, #2a4a6a); border-color: #4a8ab8; }
-    .i-crit  { background: linear-gradient(135deg, #3a1a1a, #7a2a2a); border-color: #c84a4a; }
-    .i-util  { background: linear-gradient(135deg, #3a2a1a, #6a4a1a); border-color: var(--gold); }
-    .i-shred { background: linear-gradient(135deg, #2a1a3a, #5a2a7a); border-color: #a04ad0; }
-
-    /* ─── PRIORITY CELL ─── */
-    .stars {
-      display: flex;
-      gap: 2px;
-    }
-    .star { color: var(--gold); font-size: .9rem; }
-    .star.empty { color: #2a3a55; }
-
-    /* ─── TRAITS CELL ─── */
+    /* ── TRAITS ── */
     .traits-cell { display: flex; flex-wrap: wrap; gap: .3rem; }
     .trait-tag {
-      font-size: .68rem;
+      font-size: .67rem;
       font-weight: 600;
       border-radius: 4px;
       padding: 2px 7px;
     }
-    .t-yordle  { background: rgba(155,89,182,.22); color: var(--yordle-light); border: 1px solid rgba(155,89,182,.4); }
-    .t-other   { background: rgba(200,155,60,.12); color: var(--gold-light);   border: 1px solid rgba(200,155,60,.25); }
+    .t-yordle { background: rgba(155,89,182,.22); color: var(--yordle-light); border: 1px solid rgba(155,89,182,.4); }
+    .t-other  { background: rgba(200,155,60,.12); color: var(--gold-light);   border: 1px solid rgba(200,155,60,.25); }
 
-    /* ─── NOTES ─── */
-    .note { font-size: .78rem; color: var(--muted); line-height: 1.5; max-width: 220px; }
-
-    /* ─── LEGEND ─── */
-    .legend {
-      margin-top: 1.5rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: .6rem;
-      align-items: center;
+    /* ── ITEMS ── */
+    .items-cell { display: flex; gap: .45rem; flex-wrap: wrap; align-items: flex-start; }
+    .item-slot { display: flex; flex-direction: column; align-items: center; gap: .25rem; }
+    .item-slot img {
+      width: 52px;
+      height: 52px;
+      border-radius: 8px;
+      border: 2px solid var(--border);
+      object-fit: cover;
+      transition: transform .15s, border-color .15s, box-shadow .15s;
+      cursor: default;
+      display: block;
+      background: #1a2235;
     }
-    .legend-title { font-size: .75rem; color: var(--muted); margin-right: .3rem; }
+    .item-slot img:hover {
+      transform: scale(1.15);
+      border-color: var(--gold);
+      box-shadow: 0 0 12px rgba(200,155,60,.4);
+    }
+    .item-label {
+      font-size: .6rem;
+      color: var(--muted);
+      text-align: center;
+      max-width: 56px;
+      line-height: 1.2;
+    }
+
+    /* ── PRIORITY STARS ── */
+    .stars { display: flex; gap: 2px; }
+    .star      { color: var(--gold);    font-size: .9rem; }
+    .star.empty{ color: #243045; font-size: .9rem; }
+
+    /* ── NOTE ── */
+    .note { font-size: .77rem; color: var(--muted); line-height: 1.55; max-width: 200px; }
+
+    /* ── LEGEND ── */
+    .legend-box {
+      margin-top: 1.5rem;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.2rem 1.4rem;
+    }
+    .legend-title {
+      font-family: 'Cinzel', serif;
+      font-size: .72rem;
+      color: var(--gold);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      border-left: 3px solid var(--gold);
+      padding-left: .6rem;
+      margin-bottom: 1rem;
+    }
+    .legend-row { display: flex; flex-wrap: wrap; gap: .55rem; }
     .legend-item {
       display: flex;
       align-items: center;
-      gap: .4rem;
+      gap: .45rem;
       font-size: .73rem;
-      background: var(--panel);
+      background: var(--card);
       border: 1px solid var(--border);
       border-radius: 6px;
-      padding: .2rem .6rem;
+      padding: .25rem .65rem;
     }
-    .swatch {
-      width: 16px;
-      height: 16px;
-      border-radius: 3px;
-      border: 1px solid rgba(255,255,255,.1);
+    .legend-item img {
+      width: 28px;
+      height: 28px;
+      border-radius: 5px;
+      object-fit: cover;
+      border: 1px solid var(--border);
     }
 
     footer {
@@ -263,7 +252,7 @@
 
 <header>
   <div class="badge">🐾 Comp Guide</div>
-  <h1>Yordle Build — Tabla de Items</h1>
+  <h1>Yordle Build — Items Originales</h1>
   <p class="subtitle">TFT · Yordle 6 · Items recomendados por campeón</p>
 </header>
 
@@ -286,7 +275,10 @@
         <tr>
           <td>
             <div class="champ-cell">
-              <div class="champ-img carry-border">🔫</div>
+              <div class="champ-img-wrap carry">
+                <img src="https://raw.communitydragon.org/latest/game/assets/characters/tristana/hud/tristana_square.png" alt="Tristana" />
+                <span class="carry-star">CARRY</span>
+              </div>
               <div class="champ-info">
                 <div class="name">Tristana</div>
                 <span class="cost-badge cost-2">2 Gold</span>
@@ -303,33 +295,31 @@
           <td>
             <div class="items-cell">
               <div class="item-slot">
-                <div class="item-icon i-ad" title="Infinity Edge">⚔️</div>
+                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Infinity_Edge_TFT_item.png/100px-Infinity_Edge_TFT_item.png" alt="Infinity Edge" />
                 <div class="item-label">Infinity Edge</div>
               </div>
               <div class="item-slot">
-                <div class="item-icon i-ad" title="Guinsoo's Rageblade">🏹</div>
+                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Guinsoo%27s_Rageblade_TFT_item.png/100px-Guinsoo%27s_Rageblade_TFT_item.png" alt="Guinsoo's Rageblade" />
                 <div class="item-label">Guinsoo's Rageblade</div>
               </div>
               <div class="item-slot">
-                <div class="item-icon i-crit" title="Last Whisper">🗡️</div>
+                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Last_Whisper_TFT_item.png/100px-Last_Whisper_TFT_item.png" alt="Last Whisper" />
                 <div class="item-label">Last Whisper</div>
               </div>
             </div>
           </td>
-          <td>
-            <div class="stars">
-              <span class="star">★</span><span class="star">★</span><span class="star">★</span>
-              <span class="star">★</span><span class="star">★</span>
-            </div>
-          </td>
-          <td><p class="note">Carry principal. Llevar a ⭐⭐⭐ cuanto antes. Posicionar en flanco.</p></td>
+          <td><div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div></td>
+          <td><p class="note">Carry principal. Llevar a ⭐⭐⭐ cuanto antes. Posicionar en el flanco.</p></td>
         </tr>
 
         <!-- VEX -->
         <tr>
           <td>
             <div class="champ-cell">
-              <div class="champ-img carry-border">💜</div>
+              <div class="champ-img-wrap carry">
+                <img src="https://raw.communitydragon.org/latest/game/assets/characters/vex/hud/vex_square_0.png" alt="Vex" />
+                <span class="carry-star">CARRY</span>
+              </div>
               <div class="champ-info">
                 <div class="name">Vex</div>
                 <span class="cost-badge cost-4">4 Gold</span>
@@ -346,25 +336,20 @@
           <td>
             <div class="items-cell">
               <div class="item-slot">
-                <div class="item-icon i-ap" title="Rabadon's Deathcap">🔮</div>
+                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Rabadon%27s_Deathcap_TFT_item.png/100px-Rabadon%27s_Deathcap_TFT_item.png" alt="Rabadon's Deathcap" />
                 <div class="item-label">Rabadon's Deathcap</div>
               </div>
               <div class="item-slot">
-                <div class="item-icon i-crit" title="Jeweled Gauntlet">💍</div>
+                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Jeweled_Gauntlet_TFT_item.png/100px-Jeweled_Gauntlet_TFT_item.png" alt="Jeweled Gauntlet" />
                 <div class="item-label">Jeweled Gauntlet</div>
               </div>
               <div class="item-slot">
-                <div class="item-icon i-mana" title="Blue Buff">💙</div>
+                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Blue_Buff_TFT_item.png/100px-Blue_Buff_TFT_item.png" alt="Blue Buff" />
                 <div class="item-label">Blue Buff</div>
               </div>
             </div>
           </td>
-          <td>
-            <div class="stars">
-              <span class="star">★</span><span class="star">★</span><span class="star">★</span>
-              <span class="star">★</span><span class="star">★</span>
-            </div>
-          </td>
+          <td><div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div></td>
           <td><p class="note">Carry AP. Blue Buff permite castear cada ronda. Crit + AP = burst enorme.</p></td>
         </tr>
 
@@ -372,7 +357,10 @@
         <tr>
           <td>
             <div class="champ-cell">
-              <div class="champ-img">✨</div>
+              <div class="champ-img-wrap carry">
+                <img src="https://raw.communitydragon.org/latest/game/assets/characters/lulu/hud/lulu_square_0.png" alt="Lulu" />
+                <span class="carry-star">CARRY</span>
+              </div>
               <div class="champ-info">
                 <div class="name">Lulu</div>
                 <span class="cost-badge cost-3">3 Gold</span>
@@ -389,33 +377,30 @@
           <td>
             <div class="items-cell">
               <div class="item-slot">
-                <div class="item-icon i-ap" title="Rabadon's Deathcap">🔮</div>
+                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Rabadon%27s_Deathcap_TFT_item.png/100px-Rabadon%27s_Deathcap_TFT_item.png" alt="Rabadon's Deathcap" />
                 <div class="item-label">Rabadon's Deathcap</div>
               </div>
               <div class="item-slot">
-                <div class="item-icon i-mana" title="Archangel's Staff">📖</div>
+                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Archangel%27s_Staff_TFT_item.png/100px-Archangel%27s_Staff_TFT_item.png" alt="Archangel's Staff" />
                 <div class="item-label">Archangel's Staff</div>
               </div>
               <div class="item-slot">
-                <div class="item-icon i-util" title="Zeke's Herald">⚡</div>
+                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Zeke%27s_Herald_TFT_item.png/100px-Zeke%27s_Herald_TFT_item.png" alt="Zeke's Herald" />
                 <div class="item-label">Zeke's Herald</div>
               </div>
             </div>
           </td>
-          <td>
-            <div class="stars">
-              <span class="star">★</span><span class="star">★</span><span class="star">★</span>
-              <span class="star">★</span><span class="star empty">★</span>
-            </div>
-          </td>
-          <td><p class="note">Potencia habilidades de aliados. Zeke's da velocidad de ataque al carry más cercano.</p></td>
+          <td><div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span></div></td>
+          <td><p class="note">Potencia habilidades. Zeke's da velocidad de ataque al carry más cercano.</p></td>
         </tr>
 
         <!-- HEIMERDINGER -->
         <tr>
           <td>
             <div class="champ-cell">
-              <div class="champ-img">🔧</div>
+              <div class="champ-img-wrap">
+                <img src="https://raw.communitydragon.org/latest/game/assets/characters/heimerdinger/hud/heimerdinger_square.png" alt="Heimerdinger" />
+              </div>
               <div class="champ-info">
                 <div class="name">Heimerdinger</div>
                 <span class="cost-badge cost-3">3 Gold</span>
@@ -432,33 +417,30 @@
           <td>
             <div class="items-cell">
               <div class="item-slot">
-                <div class="item-icon i-ap" title="Morellonomicon">🔥</div>
+                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Morellonomicon_TFT_item.png/100px-Morellonomicon_TFT_item.png" alt="Morellonomicon" />
                 <div class="item-label">Morellonomicon</div>
               </div>
               <div class="item-slot">
-                <div class="item-icon i-mana" title="Blue Buff">💙</div>
+                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Blue_Buff_TFT_item.png/100px-Blue_Buff_TFT_item.png" alt="Blue Buff" />
                 <div class="item-label">Blue Buff</div>
               </div>
               <div class="item-slot">
-                <div class="item-icon i-shred" title="Ionic Spark">🌀</div>
+                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Ionic_Spark_TFT_item.png/100px-Ionic_Spark_TFT_item.png" alt="Ionic Spark" />
                 <div class="item-label">Ionic Spark</div>
               </div>
             </div>
           </td>
-          <td>
-            <div class="stars">
-              <span class="star">★</span><span class="star">★</span><span class="star">★</span>
-              <span class="star empty">★</span><span class="star empty">★</span>
-            </div>
-          </td>
-          <td><p class="note">Buena opción secundaria AP. Ionic Spark shredea MR del enemigo para Vex.</p></td>
+          <td><div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span><span class="star empty">★</span></div></td>
+          <td><p class="note">Ionic Spark shredea MR del enemigo para todo el equipo AP.</p></td>
         </tr>
 
         <!-- POPPY -->
         <tr>
           <td>
             <div class="champ-cell">
-              <div class="champ-img">🐰</div>
+              <div class="champ-img-wrap">
+                <img src="https://raw.communitydragon.org/latest/game/assets/characters/poppy/hud/poppy_square.png" alt="Poppy" />
+              </div>
               <div class="champ-info">
                 <div class="name">Poppy</div>
                 <span class="cost-badge cost-1">1 Gold</span>
@@ -475,33 +457,30 @@
           <td>
             <div class="items-cell">
               <div class="item-slot">
-                <div class="item-icon i-tank" title="Warmog's Armor">❤️</div>
+                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Warmog%27s_Armor_TFT_item.png/100px-Warmog%27s_Armor_TFT_item.png" alt="Warmog's Armor" />
                 <div class="item-label">Warmog's Armor</div>
               </div>
               <div class="item-slot">
-                <div class="item-icon i-tank" title="Sunfire Cape">☀️</div>
+                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Sunfire_Cape_TFT_item.png/100px-Sunfire_Cape_TFT_item.png" alt="Sunfire Cape" />
                 <div class="item-label">Sunfire Cape</div>
               </div>
               <div class="item-slot">
-                <div class="item-icon i-tank" title="Dragon's Claw">🐉</div>
+                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Dragon%27s_Claw_TFT_item.png/100px-Dragon%27s_Claw_TFT_item.png" alt="Dragon's Claw" />
                 <div class="item-label">Dragon's Claw</div>
               </div>
             </div>
           </td>
-          <td>
-            <div class="stars">
-              <span class="star">★</span><span class="star">★</span><span class="star">★</span>
-              <span class="star empty">★</span><span class="star empty">★</span>
-            </div>
-          </td>
-          <td><p class="note">Frontline principal. Sunfire quema a los enemigos mientras aguanta daño.</p></td>
+          <td><div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span><span class="star empty">★</span></div></td>
+          <td><p class="note">Frontline principal. Sunfire quema a los enemigos. Dragon's Claw contra AP.</p></td>
         </tr>
 
         <!-- RUMBLE -->
         <tr>
           <td>
             <div class="champ-cell">
-              <div class="champ-img">🤖</div>
+              <div class="champ-img-wrap">
+                <img src="https://raw.communitydragon.org/latest/game/assets/characters/rumble/hud/rumble_square.png" alt="Rumble" />
+              </div>
               <div class="champ-info">
                 <div class="name">Rumble</div>
                 <span class="cost-badge cost-4">4 Gold</span>
@@ -518,33 +497,30 @@
           <td>
             <div class="items-cell">
               <div class="item-slot">
-                <div class="item-icon i-tank" title="Warmog's Armor">❤️</div>
+                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Warmog%27s_Armor_TFT_item.png/100px-Warmog%27s_Armor_TFT_item.png" alt="Warmog's Armor" />
                 <div class="item-label">Warmog's Armor</div>
               </div>
               <div class="item-slot">
-                <div class="item-icon i-ap" title="Morellonomicon">🔥</div>
+                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Morellonomicon_TFT_item.png/100px-Morellonomicon_TFT_item.png" alt="Morellonomicon" />
                 <div class="item-label">Morellonomicon</div>
               </div>
               <div class="item-slot">
-                <div class="item-icon i-tank" title="Bramble Vest">🌿</div>
+                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Bramble_Vest_TFT_item.png/100px-Bramble_Vest_TFT_item.png" alt="Bramble Vest" />
                 <div class="item-label">Bramble Vest</div>
               </div>
             </div>
           </td>
-          <td>
-            <div class="stars">
-              <span class="star">★</span><span class="star">★</span><span class="star">★</span>
-              <span class="star empty">★</span><span class="star empty">★</span>
-            </div>
-          </td>
-          <td><p class="note">Tank + daño AP mixto. Bramble Vest bloquea curas del enemigo.</p></td>
+          <td><div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span><span class="star empty">★</span></div></td>
+          <td><p class="note">Tank + daño mixto. Bramble Vest bloquea las curas del enemigo.</p></td>
         </tr>
 
         <!-- TEEMO -->
         <tr>
           <td>
             <div class="champ-cell">
-              <div class="champ-img">🍄</div>
+              <div class="champ-img-wrap">
+                <img src="https://raw.communitydragon.org/latest/game/assets/characters/teemo/hud/teemo_square_0.asu_teemo.png" alt="Teemo" />
+              </div>
               <div class="champ-info">
                 <div class="name">Teemo</div>
                 <span class="cost-badge cost-2">2 Gold</span>
@@ -561,25 +537,20 @@
           <td>
             <div class="items-cell">
               <div class="item-slot">
-                <div class="item-icon i-ap" title="Rabadon's Deathcap">🔮</div>
+                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Rabadon%27s_Deathcap_TFT_item.png/100px-Rabadon%27s_Deathcap_TFT_item.png" alt="Rabadon's Deathcap" />
                 <div class="item-label">Rabadon's Deathcap</div>
               </div>
               <div class="item-slot">
-                <div class="item-icon i-crit" title="Jeweled Gauntlet">💍</div>
+                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Jeweled_Gauntlet_TFT_item.png/100px-Jeweled_Gauntlet_TFT_item.png" alt="Jeweled Gauntlet" />
                 <div class="item-label">Jeweled Gauntlet</div>
               </div>
               <div class="item-slot">
-                <div class="item-icon i-ap" title="Morellonomicon">🔥</div>
+                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Morellonomicon_TFT_item.png/100px-Morellonomicon_TFT_item.png" alt="Morellonomicon" />
                 <div class="item-label">Morellonomicon</div>
               </div>
             </div>
           </td>
-          <td>
-            <div class="stars">
-              <span class="star">★</span><span class="star">★</span><span class="star">★</span>
-              <span class="star empty">★</span><span class="star empty">★</span>
-            </div>
-          </td>
+          <td><div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span><span class="star empty">★</span></div></td>
           <td><p class="note">Sus hongos hacen mucho daño AP. Morellonomicon + Rabadon = setas letales.</p></td>
         </tr>
 
@@ -587,7 +558,9 @@
         <tr>
           <td>
             <div class="champ-cell">
-              <div class="champ-img">🦊</div>
+              <div class="champ-img-wrap">
+                <img src="https://raw.communitydragon.org/latest/game/assets/characters/kennen/hud/kennen_square.png" alt="Kennen" />
+              </div>
               <div class="champ-info">
                 <div class="name">Kennen</div>
                 <span class="cost-badge cost-1">1 Gold</span>
@@ -604,50 +577,102 @@
           <td>
             <div class="items-cell">
               <div class="item-slot">
-                <div class="item-icon i-mana" title="Frozen Heart">🧊</div>
+                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Frozen_Heart_item.png/100px-Frozen_Heart_item.png" alt="Frozen Heart" />
                 <div class="item-label">Frozen Heart</div>
               </div>
               <div class="item-slot">
-                <div class="item-icon i-shred" title="Ionic Spark">🌀</div>
+                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Ionic_Spark_TFT_item.png/100px-Ionic_Spark_TFT_item.png" alt="Ionic Spark" />
                 <div class="item-label">Ionic Spark</div>
               </div>
               <div class="item-slot">
-                <div class="item-icon i-tank" title="Gargoyle Stoneplate">🪨</div>
+                <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Gargoyle_Stoneplate_TFT_item.png/100px-Gargoyle_Stoneplate_TFT_item.png" alt="Gargoyle Stoneplate" />
                 <div class="item-label">Gargoyle Stoneplate</div>
               </div>
             </div>
           </td>
-          <td>
-            <div class="stars">
-              <span class="star">★</span><span class="star">★</span><span class="star empty">★</span>
-              <span class="star empty">★</span><span class="star empty">★</span>
-            </div>
-          </td>
-          <td><p class="note">Activa Invoker. Frozen Heart reduce velocidad de ataque enemiga. No priorizar items aquí.</p></td>
+          <td><div class="stars"><span class="star">★</span><span class="star">★</span><span class="star empty">★</span><span class="star empty">★</span><span class="star empty">★</span></div></td>
+          <td><p class="note">Activa Invoker. Frozen Heart reduce velocidad de ataque enemiga.</p></td>
         </tr>
 
       </tbody>
     </table>
   </div>
 
-  <!-- LEYENDA DE ITEMS -->
-  <div style="margin-top:1.5rem; background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:1.2rem 1.4rem;">
-    <p style="font-family:'Cinzel',serif; font-size:.75rem; color:var(--gold); letter-spacing:.1em; text-transform:uppercase; border-left:3px solid var(--gold); padding-left:.6rem; margin-bottom:1rem;">Leyenda de Colores — Tipo de Item</p>
-    <div class="legend">
-      <div class="legend-item"><div class="swatch" style="background:linear-gradient(135deg,#2a1f4e,#4a2d8a); border-color:#7c5cdb"></div> AP (Poder de Habilidad)</div>
-      <div class="legend-item"><div class="swatch" style="background:linear-gradient(135deg,#3a2a1a,#7a4a1a); border-color:#c8762a"></div> AD (Daño Físico)</div>
-      <div class="legend-item"><div class="swatch" style="background:linear-gradient(135deg,#1a3a2a,#2d6040); border-color:#4a9e70"></div> Tank (Aguante)</div>
-      <div class="legend-item"><div class="swatch" style="background:linear-gradient(135deg,#1a2a3a,#2a4a6a); border-color:#4a8ab8"></div> Mana / Mana AP</div>
-      <div class="legend-item"><div class="swatch" style="background:linear-gradient(135deg,#3a1a1a,#7a2a2a); border-color:#c84a4a"></div> Crit (Crítico)</div>
-      <div class="legend-item"><div class="swatch" style="background:linear-gradient(135deg,#3a2a1a,#6a4a1a); border-color:#c89b3c"></div> Utilidad</div>
-      <div class="legend-item"><div class="swatch" style="background:linear-gradient(135deg,#2a1a3a,#5a2a7a); border-color:#a04ad0"></div> Shred / Resistencia</div>
+  <!-- LEYENDA ITEMS CON ICONOS REALES -->
+  <div class="legend-box">
+    <p class="legend-title">Todos los Items de la Build</p>
+    <div class="legend-row">
+      <div class="legend-item">
+        <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Infinity_Edge_TFT_item.png/64px-Infinity_Edge_TFT_item.png" alt="IE" />
+        Infinity Edge
+      </div>
+      <div class="legend-item">
+        <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Guinsoo%27s_Rageblade_TFT_item.png/64px-Guinsoo%27s_Rageblade_TFT_item.png" alt="Guinsoo" />
+        Guinsoo's Rageblade
+      </div>
+      <div class="legend-item">
+        <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Last_Whisper_TFT_item.png/64px-Last_Whisper_TFT_item.png" alt="LW" />
+        Last Whisper
+      </div>
+      <div class="legend-item">
+        <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Rabadon%27s_Deathcap_TFT_item.png/64px-Rabadon%27s_Deathcap_TFT_item.png" alt="Rabadon" />
+        Rabadon's Deathcap
+      </div>
+      <div class="legend-item">
+        <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Jeweled_Gauntlet_TFT_item.png/64px-Jeweled_Gauntlet_TFT_item.png" alt="JG" />
+        Jeweled Gauntlet
+      </div>
+      <div class="legend-item">
+        <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Blue_Buff_TFT_item.png/64px-Blue_Buff_TFT_item.png" alt="Blue Buff" />
+        Blue Buff
+      </div>
+      <div class="legend-item">
+        <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Morellonomicon_TFT_item.png/64px-Morellonomicon_TFT_item.png" alt="Morellos" />
+        Morellonomicon
+      </div>
+      <div class="legend-item">
+        <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Warmog%27s_Armor_TFT_item.png/64px-Warmog%27s_Armor_TFT_item.png" alt="Warmog" />
+        Warmog's Armor
+      </div>
+      <div class="legend-item">
+        <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Sunfire_Cape_TFT_item.png/64px-Sunfire_Cape_TFT_item.png" alt="Sunfire" />
+        Sunfire Cape
+      </div>
+      <div class="legend-item">
+        <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Ionic_Spark_TFT_item.png/64px-Ionic_Spark_TFT_item.png" alt="Ionic Spark" />
+        Ionic Spark
+      </div>
+      <div class="legend-item">
+        <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Frozen_Heart_item.png/64px-Frozen_Heart_item.png" alt="Frozen Heart" />
+        Frozen Heart
+      </div>
+      <div class="legend-item">
+        <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Bramble_Vest_TFT_item.png/64px-Bramble_Vest_TFT_item.png" alt="Bramble Vest" />
+        Bramble Vest
+      </div>
+      <div class="legend-item">
+        <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Archangel%27s_Staff_TFT_item.png/64px-Archangel%27s_Staff_TFT_item.png" alt="Archangel" />
+        Archangel's Staff
+      </div>
+      <div class="legend-item">
+        <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Zeke%27s_Herald_TFT_item.png/64px-Zeke%27s_Herald_TFT_item.png" alt="Zeke's" />
+        Zeke's Herald
+      </div>
+      <div class="legend-item">
+        <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Gargoyle_Stoneplate_TFT_item.png/64px-Gargoyle_Stoneplate_TFT_item.png" alt="Gargoyle" />
+        Gargoyle Stoneplate
+      </div>
+      <div class="legend-item">
+        <img src="https://wiki.leagueoflegends.com/en-us/images/thumb/Dragon%27s_Claw_TFT_item.png/64px-Dragon%27s_Claw_TFT_item.png" alt="Dragon's Claw" />
+        Dragon's Claw
+      </div>
     </div>
   </div>
 
 </div>
 
 <footer>
-  <p>TFT · Yordle Build Guide · Tabla de Items por Campeón</p>
+  <p>TFT · Yordle Build Guide · Imágenes: Community Dragon + League of Legends Wiki</p>
   <p style="margin-top:.3rem">Las estadísticas pueden variar según el parche actual del juego.</p>
 </footer>
 
